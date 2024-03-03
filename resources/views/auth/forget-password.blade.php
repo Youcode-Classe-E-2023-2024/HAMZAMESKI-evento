@@ -34,6 +34,9 @@
                     @csrf
                     <div class="pb-2 pt-4">
                         <input type="email" name="email" id="email" placeholder="Email" class="block w-full p-4 text-lg rounded-sm bg-black">
+                        @error('email')
+                        {{ $message }}
+                        @enderror
                     </div>
                     <div class="px-4 pb-2 pt-4">
                         <button class="uppercase block w-full p-4 text-lg rounded-full bg-pink-500 hover:bg-pink-600 focus:outline-none">reset password</button>
