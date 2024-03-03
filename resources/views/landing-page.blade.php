@@ -27,12 +27,12 @@
                 </p>
                 <div class="flex items-center">
                     <a
-                        href="/"
-                        class="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-black hover:bg-red-500 focus:shadow-outline focus:outline-none"
+                        href="{{ route('register') }}"
+                        class="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-black hover:bg-pink-500 focus:shadow-outline focus:outline-none"
                     >
                         Register
                     </a>
-                    <a href="/" aria-label="" class="inline-flex items-center justify-center h-12 px-6 gap-1 border border-solid border-black rounded font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700 transition duration-200 hover:bg-red-500 hover:text-white">
+                    <a href="{{ route('login') }}" aria-label="" class="inline-flex items-center justify-center h-12 px-6 gap-1 border border-solid border-black rounded font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700 transition duration-200 hover:bg-pink-500 hover:text-white hover:border-[0]">
                         <span>
                             Login
                         </span>
