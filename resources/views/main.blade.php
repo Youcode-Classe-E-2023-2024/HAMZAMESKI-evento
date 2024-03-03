@@ -1,14 +1,8 @@
 @extends('layout.layout')
 @section('content')
     <!-- component -->
-    <!-- Create By Joker Banny | Design From Figma: By ABM -->
     <div class="flex flex-col h-full" style="background-color: #161616;">
-        <div class="topbar">
-            <div class="toggle">
-                <ion-icon name="menu-outline" class="text-white"></ion-icon>
-            </div>
-        </div>
-        <div class="mx-auto h-full">
+        <div class="mx-auto mt-8 h-full">
             <div class="mx-auto h-[213px] w-[213px] overflow-hidden rounded-full bg-gradient-to-tr from-[#FF8660] to-[#8000FF]">
                 <img src="https://i.imgur.com/4U5tBXC.png" alt="" />
             </div>
@@ -19,7 +13,6 @@
             <p class="mx-auto mt-[40px] mb-[54px] text-[18px] font-light text-[#C5C5C5] text-center max-w-lg">
                 The objective is to provide an optimal user experience for participants, organisers, and administrators. This plate is enabled for users to discover, reserve and generate tickets for a variety of events, as the organizers have the possibility of creating and generating more suitable events.
             </p>
-
         </div>
     </div>
 @endsection

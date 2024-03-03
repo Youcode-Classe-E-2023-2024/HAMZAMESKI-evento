@@ -10,7 +10,7 @@
         </li>
 
         <li class="{{ $black_hover == 'home' ? 'black_hover': '' }}">
-            <a href="#">
+            <a href="{{ route('main') }}">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -19,7 +19,7 @@
         </li>
 
         <li class="{{ $black_hover == 'Be an organizer' ? 'black_hover': '' }}">
-            <a href="#">
+            <a href="{{ route('subscribe') }}">
                         <span class="icon">
                             <ion-icon name="cube-outline"></ion-icon>
                         </span>
@@ -89,6 +89,10 @@
                         </form>
                 <span class="title">Sign Out</span>
             </a>
+        </li>
+
+        <li>
+            <ion-icon class="toggle text-white" name="chevron-back-outline"></ion-icon>
         </li>
     </ul>
 </div>

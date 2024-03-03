@@ -37,7 +37,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 
 Route::delete('/user/delete', [AuthController::class, 'destroy'])->name('user.delete');
 
-// forget-password route
+/* forget-password route */
 Route::get('/forget-password', [ForgetPasswordController::class, 'forgetPassword'])->name('forget.password');
 
 Route::post('/forget-password', [ForgetPasswordController::class, 'forgetPasswordPost'])->name('forget.password.post');
@@ -46,3 +46,8 @@ Route::get('/reset-password/{token}', [ForgetPasswordController::class, 'resetPa
 
 Route::post('/reset-password', [ForgetPasswordController::class, 'resetPasswordPost'])->name('reset.password.post');
 
+/* subscribe route */
+Route::get('/subscribe', function () {
+    $black_hover = 'Be an organizer';
+    return view('subscribe', compact('black_hover'));
+})->name('subscribe');
