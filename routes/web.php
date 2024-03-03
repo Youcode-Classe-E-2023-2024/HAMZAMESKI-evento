@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgetPasswordController;
 
@@ -21,9 +22,7 @@ Route::get('/', function () {
 });
 
 /* main route */
-Route::get('/main', function () {
-    return view('main');
-})->name('main')->middleware('auth');
+Route::get('/main', [MainController::class, 'index'])->name('main')->middleware('auth');
 
 /* auth route */
 Route::get('/register', [AuthController::class, 'register'])->name('register')->middleware('guest');
