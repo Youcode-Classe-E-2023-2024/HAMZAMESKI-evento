@@ -18,9 +18,7 @@ class AuthController extends Controller
         $validated = request()->validate([
             'name' => 'required|min:5|max:50',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'bio' => 'required|min:5|max:200'
+            'password' => 'required|confirmed'
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -30,7 +28,7 @@ class AuthController extends Controller
             $validated['image'] = $imagePath;
         }
         $user = User::create($validated);
-        $user->assignRole('member');
+//        $user->assignRole('member');
 
         return redirect()->route('login');
     }

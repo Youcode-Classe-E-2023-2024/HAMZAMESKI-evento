@@ -36,15 +36,26 @@
                 <p class="text-gray-100">
                     or use email your account
                 </p>
-                <form action="" class="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
+                <form action="{{ route('login.authenticate') }}" method="POST" class="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
+                    @csrf
                     <div class="pb-2 pt-4">
                         <input type="email" name="email" id="email" placeholder="Email" class="block w-full p-4 text-lg rounded-sm bg-black">
+                        <div class="text-red-500">
+                            @error('email')
+                            {{ $message }}
+                            @enderror
+                        </div>
                     </div>
                     <div class="pb-2 pt-4">
                         <input class="block w-full p-4 text-lg rounded-sm bg-black" type="password" name="password" id="password" placeholder="Password">
+                        <div class="text-red-500">
+                            @error('password')
+                            {{ $message }}
+                            @enderror
+                        </div>
                     </div>
                     <div class="text-right text-gray-400 hover:underline hover:text-gray-100">
-                        <a href="#">Forgot your password?</a>
+                        <a href="{{ route('forget.password') }}">Forgot your password?</a>
                     </div>
                     <div class="px-4 pb-2 pt-4">
                         <button class="uppercase block w-full p-4 text-lg rounded-full bg-pink-500 hover:bg-pink-600 focus:outline-none">sign in</button>
