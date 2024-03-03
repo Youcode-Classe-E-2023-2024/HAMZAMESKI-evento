@@ -27,10 +27,11 @@
                 <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
             </div>
             <div class="w-full py-6 z-20">
-                <p class="text-gray-100">
+                <p class="text-gray-100 uppercase">
                     You will receive an email in that address
                 </p>
-                <form action="" class="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
+                <form action="{{ route('forget.password.post') }}" method="POST" class="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
+                    @csrf
                     <div class="pb-2 pt-4">
                         <input type="email" name="email" id="email" placeholder="Email" class="block w-full p-4 text-lg rounded-sm bg-black">
                     </div>

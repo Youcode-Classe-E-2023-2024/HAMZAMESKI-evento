@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ForgetPasswordController;
 
 
 /*
@@ -19,6 +20,10 @@ Route::get('/', function () {
     return view('landing-page');
 });
 
+/* main route */
+Route::get('/main', function () {
+    return view('main');
+})->name('main');
 
 /* auth route */
 Route::get('/register', [AuthController::class, 'register'])->name('register')->middleware('guest');
