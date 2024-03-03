@@ -23,7 +23,7 @@ Route::get('/', function () {
 /* main route */
 Route::get('/main', function () {
     return view('main');
-})->name('main');
+})->name('main')->middleware('auth');
 
 /* auth route */
 Route::get('/register', [AuthController::class, 'register'])->name('register')->middleware('guest');
