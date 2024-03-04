@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgetPasswordController;
+use App\Http\Controllers\OrganizerSubController;
+use App\Http\Controllers\ManageEventController;
 
 
 /*
@@ -47,7 +49,13 @@ Route::get('/reset-password/{token}', [ForgetPasswordController::class, 'resetPa
 Route::post('/reset-password', [ForgetPasswordController::class, 'resetPasswordPost'])->name('reset.password.post');
 
 /* subscribe route */
+Route::post('/subscribe/store', [OrganizerSubController::class, 'subscribe'])->name('subscribe.store');
+
 Route::get('/subscribe', function () {
     $black_hover = 'Be an organizer';
     return view('subscribe', compact('black_hover'));
 })->name('subscribe');
+
+
+/* ManageEvent route */
+Route::get('/manage-event/show ', [ManageEventController::class, 'index'])->name('manage-event.show');
