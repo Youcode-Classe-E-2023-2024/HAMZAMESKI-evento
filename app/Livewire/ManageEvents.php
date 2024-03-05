@@ -33,7 +33,8 @@ class ManageEvents extends Component
             ->orderByDesc('updated_at')
             ->paginate($this->perPage);
 
-        return view('livewire.manage-events',compact('events'));
+        $variable = 'test';
+        return view('livewire.manage-events',compact('variable'));
     }
 
     /*************** event popup update form ****************/
@@ -65,7 +66,7 @@ class ManageEvents extends Component
             $this->available_places = $event->available_places;
             $this->acceptance = $event->acceptance;
         }else{
-            dd('the entered id does not exist');
+            dd('id is not exist');
         }
     }
 
@@ -116,5 +117,32 @@ class ManageEvents extends Component
         session()->flash('message','Event Deleted Successfully');
         $this->dispatch('close-modal');
     }
-}
 
+    /*************** acceptance popup form ****************/
+    public function editAcceptance(int $event_id)
+    {
+        $event = Event::find($event_id);
+        if($event){
+            $this->event_id = $event->id;
+            $this->acceptance = $event->acceptance;
+
+        }else{
+            dd('id is not exist');
+        }
+    }
+
+    public function updateAcceptance()
+    {
+        $validatedData = $this->validate([
+            'acceptance' => 'required'
+        ]);
+
+        Event::where('id', $this->event_id)->update([
+            'acceptance' => $validatedData['acceptance'],
+        ]);
+
+        session()->flash('message', 'Event acceptance Updated Successfully');
+
+        $this->dispatch('close-modal');
+    }
+}

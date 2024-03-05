@@ -1,4 +1,4 @@
 @extends('layout.layout')
 @section('content')
-    @include('livewire.manage-events')
+    <livewire:manage-events/>
 @endsection

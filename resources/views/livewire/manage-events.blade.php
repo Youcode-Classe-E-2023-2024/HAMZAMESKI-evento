@@ -1,7 +1,6 @@
 
-
 <div id="dashboard-container" class="mt-8 flex items-center justify-center">
-    @include('manage-events.edit-delete-form')
+    @include('manage-events-popup.edit-delete-form')
 
     <section class="mt-10 w-full">
         <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
@@ -29,28 +28,25 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                         <tr>
                             <th scope="col" class="px-4 py-3">
-                                <span>name</span>
+                                name
                             </th>
                             <th scope="col" class="px-4 py-3">
-                                <span>category</span>
+                                category
                             </th>
                             <th scope="col" class="px-4 py-3">
-                                link
+                                date
                             </th>
                             <th scope="col" class="px-4 py-3">
-                                description
+                                acceptance
                             </th>
                             <th scope="col" class="px-4 py-3">
-                                <span>created at</span>
+                                available places
                             </th>
                             <th scope="col" class="px-4 py-3">
-                                updated at
+                                nmb reservations
                             </th>
                             <th scope="col" class="px-4 py-3">
-                                trend
-                            </th>
-                            <th scope="col" class="px-4 py-3">
-                                handle
+                                edit
                             </th>
                             <th scope="col" class="px-4 py-3">
                                 delete
@@ -61,25 +57,23 @@
 
                         @foreach($events as $event)
                             <tr  class="border-b dark:border-gray-700">
-                                <td scope="col" class="px-4 py-3 text-white" >{{ substr($rssItem->name, 0, 10) }}...</td>
-                                <td scope="col" class="px-4 py-3 text-white">{{ substr($rssItem->category, 0, 20) }}</td>
-                                <td scope="col" class="px-4 py-3 text-white">{{ substr($rssItem->link, 0, 10) }}...</td>
-                                <td scope="col" class="px-4 py-3 text-white">{{ substr($rssItem->description, 0, 10) }}...</td>
-                                <td scope="col" class="px-4 py-3 text-white">{{ $rssItem->created_at }}</td>
-                                <td scope="col" class="px-4 py-3 text-white">{{ $rssItem->updated_at }}</td>
+                                <td scope="col" class="px-4 py-3 text-white" >{{ $event->name }}</td>
+                                <td scope="col" class="px-4 py-3 text-white">{{ $event->category }}</td>
+                                <td scope="col" class="px-4 py-3 text-white">{{ $event->date }}</td>
                                 <td>
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#updateRssItemTrendModal" wire:click="editRssItemTrend({{$rssItem->id}})" class="btn  {{ $rssItem->trend == 'active'? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600' }}">
-                                        {{ $rssItem->trend }}
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#updateAcceptanceModal" wire:click="editAcceptance({{$event->id}})" class="btn  {{ $event->acceptance == 'manual'? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600' }}">
+                                        {{ $event->acceptance }}
                                     </button>
                                 </td>
                                 <td>
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#updateRssItemModal" wire:click="editRssItem({{$rssItem->id}})" class="btn btn-primary">
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#updateEventModal" wire:click="editEvent({{$rssItem->id}})" class="btn btn-primary">
                                         Edit
                                     </button>
                                 </td>
                                 <td scope="col" class="px-4 py-3 flex items-center justify-end">
-                                    {{--                                    <button onclick="confirm('Are you sure you want to delete {{ $rssItem->name }} ?') ? '' : event.stopImmediatePropagation()" wire:click="delete({{ $rssItem->id }})" class="px-3 py-1 bg-red-500 text-white rounded">X</button>--}}
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#deleteRssItemModal" wire:click="deleteRssItem({{$rssItem->id}})" class="btn btn-danger">Delete</button>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#deleteEventModal" wire:click="deleteEvent({{$rssItem->id}})" class="btn btn-danger">
+                                        Delete
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -103,18 +97,19 @@
                             </select>
                         </div>
                     </div>
-                    {{ $rssItems->links() }}
+                    {{ $events->links() }}
                 </div>
             </div>
         </div>
     </section>
 </div>
 
-{{-- jQuery script --}}
+ jQuery script
 <script>
     window.addEventListener('close-modal', event => {
-        $('#updateRssItemModal').modal('hide');
-        $('#deleteRssItemModal').modal('hide');
-        $('#updateRssItemTrendModal').modal('hide');
+        $('#updateEventModal').modal('hide');
+        $('#deleteEventModal').modal('hide');
+        $('#updateAcceptanceModal').modal('hide');
     })
 </script>
+
