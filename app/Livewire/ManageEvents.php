@@ -36,6 +36,17 @@ class ManageEvents extends Component
         return view('livewire.manage-events',compact('events'));
     }
 
+    /*************** event popup create form ****************/
+    public function saveEvent()
+    {
+        $validatedData = $this->validate();
+
+        Event::create($validatedData);
+        session()->flash('message','Event Added Successfully');
+        $this->resetInput();
+        $this->dispatchBrowserEvent('close-modal');
+    }
+
     /*************** event popup update form ****************/
     protected function rules()
     {

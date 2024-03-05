@@ -1,3 +1,56 @@
+<!-- Insert Event -->
+<div wire:ignore.self class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eventModalLabel">Create Student</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        wire:click="closeModal"></button>
+            </div>
+            <form wire:submit.prevent="saveEvent">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label>Event Name</label>
+                        <input type="text" wire:model="name" class="form-control">
+                        @error('name') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label>Event description</label>
+                        <input type="text" wire:model="description" class="form-control">
+                        @error('description') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="date">Event Date</label>
+                        <input type="date" id="date" wire:model="date" class="form-control">
+                        @error('date') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label>Event Place</label>
+                        <input type="text" wire:model="place" class="form-control">
+                        @error('place') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label>Event Category</label>
+                        <input type="text" wire:model="category" class="form-control">
+                        @error('category') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label>Available places</label>
+                        <input type="number" wire:model="available_places" class="form-control">
+                        @error('available_places') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" wire:click="closeModal"
+                            data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 {{-- update rss item --}}
 <div wire:ignore.self class="modal fade" id="updateEventModal" tabindex="-1" aria-labelledby="updateEventModalLabel"
      aria-hidden="true">
