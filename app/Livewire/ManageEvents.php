@@ -36,7 +36,7 @@ class ManageEvents extends Component
         return view('livewire.manage-events',compact('events'));
     }
 
-    /*************** rss items popup update form ****************/
+    /*************** event popup update form ****************/
     protected function rules()
     {
         return [
@@ -65,21 +65,25 @@ class ManageEvents extends Component
             $this->available_places = $event->available_places;
             $this->acceptance = $event->acceptance;
         }else{
-            dd('the entered id doesnt exist');
+            dd('the entered id does not exist');
         }
     }
 
-    public function updateRssItem()
+    public function updateEvent()
     {
         $validatedData = $this->validate();
 
-        RssItem::where('id',$this->rss_item_id)->update([
+        Event::where('id',$this->event_id)->update([
             'name' => $validatedData['name'],
+            'description' => $validatedData['description'],
+            'date' => $validatedData['date'],
+            'place' => $validatedData['place'],
             'category' => $validatedData['category'],
-            'link' => $validatedData['link'],
-            'description' => $validatedData['description']
+            'available_places' => $validatedData['available_places'],
+            'acceptance' => $validatedData['acceptance'],
         ]);
-        session()->flash('message','Student Updated Successfully');
+
+        session()->flash('message','Event Updated Successfully');
         $this->resetInput();
         $this->dispatch('close-modal');
     }
@@ -92,51 +96,25 @@ class ManageEvents extends Component
     public function resetInput()
     {
         $this->name = '';
-        $this->category = '';
-        $this->link = '';
         $this->description = '';
+        $this->date = null;
+        $this->place = '';
+        $this->category = '';
+        $this->available_places = '';
+        $this->acceptance = '';
     }
 
-    /*************** rss items popup delete form ***************/
-    public function deleteRssItem(int $rss_item_id)
+    /*************** event popup delete form ***************/
+    public function deleteEvent(int $event_id)
     {
-        $this->rss_item_id = $rss_item_id;
+        $this->event_id = $event_id;
     }
 
-    public function destroyRssItem()
+    public function destroyEvent()
     {
-        RssItem::find($this->rss_item_id)->delete();
-        session()->flash('message','Student Deleted Successfully');
+        Event::find($this->event_id)->delete();
+        session()->flash('message','Event Deleted Successfully');
         $this->dispatch('close-modal');
     }
-
-    /*************** rss items popup trend form ****************/
-    public function editRssItemTrend(int $rss_item_id)
-    {
-        $rssItem = RssItem::find($rss_item_id);
-        if($rssItem){
-            $this->rss_item_id = $rssItem->id;
-            $this->trend = $rssItem->trend;
-
-        }else{
-            return redirect()->to('/stored-rss-items');
-        }
-    }
-
-    public function updateRssItemTrend()
-    {
-        $validatedData = $this->validate([
-            'trend' => 'required'
-        ]);
-
-        RssItem::where('id', $this->rss_item_id)->update([
-            'trend' => $validatedData['trend'],
-        ]);
-
-        session()->flash('message', 'RSS Item Trend Updated Successfully');
-
-        $this->dispatch('close-modal');
-    }
-
 }
 

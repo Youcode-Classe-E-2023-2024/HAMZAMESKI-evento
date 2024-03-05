@@ -59,7 +59,7 @@
                         </thead>
                         <tbody>
 
-                        @foreach($rssItems as $rssItem)
+                        @foreach($events as $event)
                             <tr  class="border-b dark:border-gray-700">
                                 <td scope="col" class="px-4 py-3 text-white" >{{ substr($rssItem->name, 0, 10) }}...</td>
                                 <td scope="col" class="px-4 py-3 text-white">{{ substr($rssItem->category, 0, 20) }}</td>
