@@ -8,6 +8,7 @@ use App\Models\Event;
 
 use Livewire\WithPagination;
 
+
 class ManageEvents extends Component
 {
     use WithPagination;
@@ -36,9 +37,26 @@ class ManageEvents extends Component
         return view('livewire.manage-events',compact('events'));
     }
 
+    public $event_id, $user_id, $name, $description, $date, $place, $category, $available_places, $acceptance;
+
+    protected function rules()
+    {
+        return [
+            'user_id' => 'required',
+            'name' => 'required|min:6',
+            'description' => 'required|string|min:6',
+            'category' => 'required',
+            'place' => 'required',
+            'date' => 'required|date',
+//            'acceptance' => 'required',
+            'available_places' => 'required|integer',
+        ];
+    }
+
     /*************** event popup create form ****************/
     public function saveEvent()
     {
+        $this->user_id = auth()->user()->id;
         $validatedData = $this->validate();
 
         Event::create($validatedData);
@@ -48,33 +66,19 @@ class ManageEvents extends Component
     }
 
     /*************** event popup update form ****************/
-    protected function rules()
-    {
-        return [
-            'name' => 'required|string|min:6',
-            'description' => 'required|string|min:6',
-            'category' => 'required',
-            'place' => 'required',
-            'date' => 'required|date',
-            'acceptance' => 'required',
-            'available_places' => 'required|integer',
-        ];
-    }
-
-    public $event_id, $name, $description, $date, $place, $category, $available_places, $acceptance;
     public function editEvent(int $event_id)
     {
         $event = Event::find($event_id);
         if($event){
 
             $this->event_id = $event->id;
+            $this->user_id = $event->user_id;
             $this->name = $event->name;
             $this->description = $event->description;
             $this->date = $event->date;
             $this->place = $event->place;
             $this->category = $event->category;
             $this->available_places = $event->available_places;
-            $this->acceptance = $event->acceptance;
         }else{
             dd('id is not exist');
         }
@@ -85,13 +89,13 @@ class ManageEvents extends Component
         $validatedData = $this->validate();
 
         Event::where('id',$this->event_id)->update([
+            'user_id' => $validatedData['user_id'],
             'name' => $validatedData['name'],
             'description' => $validatedData['description'],
             'date' => $validatedData['date'],
             'place' => $validatedData['place'],
             'category' => $validatedData['category'],
             'available_places' => $validatedData['available_places'],
-            'acceptance' => $validatedData['acceptance'],
         ]);
 
         session()->flash('message','Event Updated Successfully');

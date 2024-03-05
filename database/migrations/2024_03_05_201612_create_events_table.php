@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users', 'id')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('title');
+            $table->string('name');
             $table->text('description');
             $table->date('date');
             $table->string('place');
             $table->string('category');
             $table->integer('available_places');
+            $table->integer('nmb_reservations')->default(0);
+            $table->enum('acceptance', ['automatic', 'manual'])->default('automatic');
             $table->timestamps();
         });
     }
