@@ -114,6 +114,7 @@
     {{--jQuery script--}}
     <script>
         window.addEventListener('close-modal', event => {
+            $('#eventModal').modal('hide');
             $('#updateEventModal').modal('hide');
             $('#deleteEventModal').modal('hide');
             $('#updateAcceptanceModal').modal('hide');

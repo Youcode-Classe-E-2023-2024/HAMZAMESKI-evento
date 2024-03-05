@@ -62,7 +62,7 @@ class ManageEvents extends Component
         Event::create($validatedData);
         session()->flash('message','Event Added Successfully');
         $this->resetInput();
-        $this->dispatchBrowserEvent('close-modal');
+        $this->dispatch('close-modal');
     }
 
     /*************** event popup update form ****************/
