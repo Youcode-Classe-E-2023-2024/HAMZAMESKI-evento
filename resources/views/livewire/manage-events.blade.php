@@ -1,4 +1,4 @@
-
+<div
 <div id="dashboard-container" class="mt-8 flex items-center justify-center">
     @include('manage-events-popup.edit-delete-form')
 
@@ -66,12 +66,12 @@
                                     </button>
                                 </td>
                                 <td>
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#updateEventModal" wire:click="editEvent({{$rssItem->id}})" class="btn btn-primary">
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#updateEventModal" wire:click="editEvent({{$event->id}})" class="btn btn-primary">
                                         Edit
                                     </button>
                                 </td>
                                 <td scope="col" class="px-4 py-3 flex items-center justify-end">
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#deleteEventModal" wire:click="deleteEvent({{$rssItem->id}})" class="btn btn-danger">
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#deleteEventModal" wire:click="deleteEvent({{$event->id}})" class="btn btn-danger">
                                         Delete
                                     </button>
                                 </td>
@@ -104,7 +104,7 @@
     </section>
 </div>
 
- jQuery script
+{{--jQuery script--}}
 <script>
     window.addEventListener('close-modal', event => {
         $('#updateEventModal').modal('hide');

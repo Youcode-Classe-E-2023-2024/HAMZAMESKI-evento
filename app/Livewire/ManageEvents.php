@@ -33,8 +33,7 @@ class ManageEvents extends Component
             ->orderByDesc('updated_at')
             ->paginate($this->perPage);
 
-        $variable = 'test';
-        return view('livewire.manage-events',compact('variable'));
+        return view('livewire.manage-events',compact('events'));
     }
 
     /*************** event popup update form ****************/
@@ -54,7 +53,7 @@ class ManageEvents extends Component
     public $event_id, $name, $description, $date, $place, $category, $available_places, $acceptance;
     public function editEvent(int $event_id)
     {
-        $event = RssItem::find($event_id);
+        $event = Event::find($event_id);
         if($event){
 
             $this->event_id = $event->id;
