@@ -54,8 +54,12 @@ Route::post('/subscribe/store', [OrganizerSubController::class, 'subscribe'])->n
 Route::get('/subscribe', function () {
     $black_hover = 'Be an organizer';
     return view('subscribe', compact('black_hover'));
+
 })->name('subscribe');
 
-
 /* ManageEvent route */
-Route::get('/manage-event/show ', [ManageEventController::class, 'index'])->name('manage-event.show');
+Route::get('/manageEvents', function () {
+    $black_hover = 'Manage events';
+    return view('manage-events', compact('black_hover'));
+
+})->name('manage-events');

@@ -19,4 +19,9 @@ class Event extends Model
         'acceptance',
         'nmb_reservations'
     ];
+
+    public function scopeSearch($query, $value)
+    {
+        $query->where('name', 'like', "%{$value}%");
+    }
 }
