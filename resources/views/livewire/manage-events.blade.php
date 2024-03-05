@@ -65,6 +65,8 @@
                                         {{ $event->acceptance }}
                                     </button>
                                 </td>
+                                <td scope="col" class="px-4 py-3 text-white">{{ $event->available_places }}</td>
+                                <td scope="col" class="px-4 py-3 text-white">{{ $event->nmb_reservations }}</td>
                                 <td>
                                     <button type="button" data-bs-toggle="modal" data-bs-target="#updateEventModal" wire:click="editEvent({{$event->id}})" class="btn btn-primary">
                                         Edit
