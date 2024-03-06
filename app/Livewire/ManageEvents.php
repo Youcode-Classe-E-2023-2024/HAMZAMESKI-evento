@@ -8,10 +8,14 @@ use App\Models\Event;
 
 use Livewire\WithPagination;
 
+use Livewire\WithFileUploads;
 
 class ManageEvents extends Component
 {
     use WithPagination;
+
+    use WithFileUploads;
+
     public $search = '';
     public $perPage = 5;
 
@@ -37,7 +41,7 @@ class ManageEvents extends Component
         return view('livewire.manage-events',compact('events'));
     }
 
-    public $event_id, $user_id, $name, $description, $date, $place, $category, $available_places, $acceptance;
+    public $event_id, $user_id, $name, $description, $image, $date, $place, $category, $available_places, $acceptance;
 
     protected function rules()
     {
@@ -45,10 +49,10 @@ class ManageEvents extends Component
             'user_id' => 'required',
             'name' => 'required|min:6',
             'description' => 'required|string|min:6',
+            'image' => 'required|image|max:2048',
             'category' => 'required',
             'place' => 'required',
             'date' => 'required|date',
-//            'acceptance' => 'required',
             'available_places' => 'required|integer',
         ];
     }
@@ -58,6 +62,9 @@ class ManageEvents extends Component
     {
         $this->user_id = auth()->user()->id;
         $validatedData = $this->validate();
+
+        $imagePath = $this->image->store('public/images'); // Store in storage/app/public/images directory
+        $validatedData['image'] = $imagePath;
 
         Event::create($validatedData);
         session()->flash('message','Event Added Successfully');

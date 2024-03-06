@@ -1,7 +1,7 @@
 <div>
     <h4>
-        <button type="button" class="bg-pink-500 py-3 px-2 text-white mt-8 ml-auto" data-bs-toggle="modal" data-bs-target="#eventModal">
-            Add New Student
+        <button type="button" class="bg-pink-500 py-3 px-2 text-white mt-8 ml-6 rounded" data-bs-toggle="modal" data-bs-target="#eventModal">
+            Add New Event
         </button>
     </h4>
     <div id="dashboard-container" class=" flex items-center justify-center">
