@@ -64,7 +64,8 @@ class ManageEvents extends Component
         $validatedData = $this->validate();
 
         $imagePath = $this->image->store('public/images'); // Store in storage/app/public/images directory
-        $validatedData['image'] = $imagePath;
+        $filename = basename($imagePath); // Get the filename without the path
+        $validatedData['image'] = $filename;
 
         Event::create($validatedData);
         session()->flash('message','Event Added Successfully');
@@ -95,10 +96,15 @@ class ManageEvents extends Component
     {
         $validatedData = $this->validate();
 
+        $imagePath = $this->image->store('public/images'); // Store in storage/app/public/images directory
+        $filename = basename($imagePath); // Get the filename without the path
+        $validatedData['image'] = $filename;
+
         Event::where('id',$this->event_id)->update([
             'user_id' => $validatedData['user_id'],
             'name' => $validatedData['name'],
             'description' => $validatedData['description'],
+            'image' => $validatedData['image'],
             'date' => $validatedData['date'],
             'place' => $validatedData['place'],
             'category' => $validatedData['category'],

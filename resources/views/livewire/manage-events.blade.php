@@ -5,7 +5,7 @@
         </button>
     </h4>
     <div id="dashboard-container" class=" flex items-center justify-center">
-        @include('manage-events-popup.edit-delete-form')
+        @include('manage-events-popup.add-edit-delete-form')
 
         <section class="mt-10 w-full">
             <div class="mx-auto max-w-screen-xl px-4 lg:px-12">

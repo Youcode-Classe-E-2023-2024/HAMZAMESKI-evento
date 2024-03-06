@@ -81,6 +81,11 @@
                         @error('description') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="mb-3">
+                        <label>Event image</label>
+                        <input type="file" wire:model="image" class="form-control">
+                        @error('image') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="mb-3">
                         <label for="date">Event Date</label>
                         <input type="date" id="date" wire:model="date" class="form-control">
                         @error('date') <span class="text-danger">{{ $message }}</span> @enderror
