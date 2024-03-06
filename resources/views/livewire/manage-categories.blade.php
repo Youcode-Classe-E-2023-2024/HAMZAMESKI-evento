@@ -1,6 +1,6 @@
 <div>
     <h4>
-        <button type="button" class="bg-pink-500 py-3 px-2 text-white mt-8 ml-6 rounded" data-bs-toggle="modal" data-bs-target="#eventModal">
+        <button type="button" class="bg-pink-500 py-3 px-2 text-white mt-8 ml-6 rounded" data-bs-toggle="modal" data-bs-target="#categoryModal">
             Add New Category
         </button>
     </h4>
@@ -33,22 +33,13 @@
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                             <tr>
                                 <th scope="col" class="px-4 py-3">
-                                    name
-                                </th>
-                                <th scope="col" class="px-4 py-3">
                                     category
                                 </th>
                                 <th scope="col" class="px-4 py-3">
-                                    event date
+                                    created at
                                 </th>
                                 <th scope="col" class="px-4 py-3">
-                                    acceptance
-                                </th>
-                                <th scope="col" class="px-4 py-3">
-                                    available places
-                                </th>
-                                <th scope="col" class="px-4 py-3">
-                                    nmb reservations
+                                    updated at
                                 </th>
                                 <th scope="col" class="px-4 py-3">
                                     edit
@@ -60,25 +51,18 @@
                             </thead>
                             <tbody>
 
-                            @foreach($events as $event)
+                            @foreach($categories as $category)
                                 <tr  class="border-b dark:border-gray-700">
-                                    <td scope="col" class="px-4 py-3 text-white" >{{ $event->name }}</td>
-                                    <td scope="col" class="px-4 py-3 text-white">{{ $event->category }}</td>
-                                    <td scope="col" class="px-4 py-3 text-white">{{ $event->date }}</td>
+                                    <td scope="col" class="px-4 py-3 text-white" >{{ $category->name }}</td>
+                                    <td scope="col" class="px-4 py-3 text-white">{{ $category->created_at }}</td>
+                                    <td scope="col" class="px-4 py-3 text-white">{{ $category->updated_at }}</td>
                                     <td>
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#updateAcceptanceModal" wire:click="editAcceptance({{$event->id}})" class="btn  {{ $event->acceptance == 'manual'? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600' }}">
-                                            {{ $event->acceptance }}
-                                        </button>
-                                    </td>
-                                    <td scope="col" class="px-4 py-3 text-white">{{ $event->available_places }}</td>
-                                    <td scope="col" class="px-4 py-3 text-white">{{ $event->nmb_reservations }}</td>
-                                    <td>
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#updateEventModal" wire:click="editEvent({{$event->id}})" class="btn btn-primary">
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#updateCategoryModal" wire:click="editCategory({{$category->id}})" class="btn btn-primary">
                                             Edit
                                         </button>
                                     </td>
                                     <td scope="col" class="px-4 py-3 flex items-center justify-end">
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#deleteEventModal" wire:click="deleteEvent({{$event->id}})" class="btn btn-danger">
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal" wire:click="deleteCategory({{$category->id}})" class="btn btn-danger">
                                             Delete
                                         </button>
                                     </td>
@@ -104,7 +88,7 @@
                                 </select>
                             </div>
                         </div>
-                        {{ $events->links() }}
+                        {{ $categories->links() }}
                     </div>
                 </div>
             </div>
@@ -114,10 +98,9 @@
     {{--jQuery script--}}
     <script>
         window.addEventListener('close-modal', event => {
-            $('#eventModal').modal('hide');
-            $('#updateEventModal').modal('hide');
-            $('#deleteEventModal').modal('hide');
-            $('#updateAcceptanceModal').modal('hide');
+            $('#categoryModal').modal('hide');
+            $('#updateCategoryModal').modal('hide');
+            $('#deleteCategoryModal').modal('hide');
         })
     </script>
 </div>

@@ -57,9 +57,16 @@ Route::get('/subscribe', function () {
 
 })->name('subscribe');
 
-/* ManageEvent route */
+/* manage event route */
 Route::get('/manageEvents', function () {
     $black_hover = 'Manage events';
     return view('manage-events', compact('black_hover'));
 
 })->name('manage-events');
+
+/* manage categories */
+Route::get('/manage-categories', function () {
+    $black_hover = 'Manage categories';
+    return view('manage-categories', compact('black_hover'));
+
+})->name('manage-categories');

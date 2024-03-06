@@ -27,15 +27,6 @@
             </a>
         </li>
 
-{{--        <li class="{{ $black_hover == 'Reserve a ticket' ? 'black_hover': '' }}">--}}
-{{--            <a href="#">--}}
-{{--                        <span class="icon">--}}
-{{--                            <ion-icon name="ticket-outline"></ion-icon>--}}
-{{--                        </span>--}}
-{{--                <span class="title">Reserve a ticket</span>--}}
-{{--            </a>--}}
-{{--        </li>--}}
-
         <li class="{{ $black_hover == 'Manage events' ? 'black_hover': '' }}">
             <a href="{{ route('manage-events') }}" class="">
                         <span class="icon">
@@ -54,7 +45,7 @@
             </a>
         </li>
         <li class="{{ $black_hover == 'Manage categories' ? 'black_hover': '' }}">
-            <a href="#">
+            <a href="{{ route('manage-categories') }}">
                         <span class="icon">
                             <ion-icon name="grid-outline"></ion-icon>
                         </span>
