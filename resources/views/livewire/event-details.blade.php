@@ -11,7 +11,11 @@
                         </div>
                         <div class="flex -mx-2 mb-4">
                             <div class="w-1/2 px-2">
-                                <button class="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-full font-bold" data-bs-toggle="modal" data-bs-target="#confirmReservationModal" wire:click="reserveTicket({{$event->id}})">Reserve Ticket</button>
+                                @if(App\Models\Reservation::where('user_id', auth()->id())->where('event_id', $event->id)->first())
+                                    <div class="w-full bg-green-300 text-white py-2 px-4 rounded-full font-bold">Ticket Reserved</div>
+                                @else
+                                    <button class="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-full font-bold" data-bs-toggle="modal" data-bs-target="#confirmReservationModal" wire:click="reserveTicket({{$event->id}})">Reserve Ticket</button>
+                                @endif
                             </div>
                         </div>
                     </div>
