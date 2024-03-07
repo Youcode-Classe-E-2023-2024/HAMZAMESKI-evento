@@ -77,7 +77,7 @@ Route::get('/manage-categories', function () {
 
 Route::get('/event-details/{event}', function (Event $event) {
     $black_hover = 'Home';
-    return view('livewire.event-details', compact('event', 'black_hover'));
+    return view('event.event-details', compact('event', 'black_hover'));
 
 })->name('event-details');
 

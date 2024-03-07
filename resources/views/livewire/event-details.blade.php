@@ -1,6 +1,6 @@
-@extends('layout.layout')
-@section('content')
+<div>
     @include('reserve-ticket-popup.confirm-reservation-form')
+
     <div class="h-full flex items-center justify-center">
         <div class="bg-gray-100 dark:bg-gray-800 py-8">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -51,11 +51,12 @@
             </div>
         </div>
     </div>
-@endsection
 
-{{--jQuery script--}}
-<script>
-    window.addEventListener('close-modal', event => {
-        $('#confirmReservationModal').modal('hide');
-    })
-</script>
+    {{--jQuery script--}}
+    <script>
+        window.addEventListener('close-modal', event => {
+            $('#confirmReservationModal').modal('hide');
+        })
+    </script>
+
+</div>
