@@ -6,6 +6,8 @@ use Livewire\Component;
 
 use App\Models\Event;
 
+use App\Models\Category;
+
 use Livewire\WithPagination;
 
 use Livewire\WithFileUploads;
@@ -38,10 +40,12 @@ class ManageEvents extends Component
             ->orderByDesc('updated_at')
             ->paginate($this->perPage);
 
-        return view('livewire.manage-events',compact('events'));
+        $categories = Category::latest()->get();
+
+        return view('livewire.manage-events',compact('events', 'categories'));
     }
 
-    public $event_id, $user_id, $name, $description, $image, $date, $place, $category, $available_places, $acceptance;
+    public $event_id, $user_id, $name, $description, $image, $date, $place, $category_id, $available_places, $ticket_price, $acceptance;
 
     protected function rules()
     {
@@ -49,11 +53,12 @@ class ManageEvents extends Component
             'user_id' => 'required',
             'name' => 'required|min:6',
             'description' => 'required|string|min:6',
+            'category_id' => 'required',
             'image' => 'required|image|max:2048',
-            'category' => 'required',
             'place' => 'required',
             'date' => 'required|date',
             'available_places' => 'required|integer',
+            'ticket_price' => 'required'
         ];
     }
 
@@ -85,8 +90,9 @@ class ManageEvents extends Component
             $this->description = $event->description;
             $this->date = $event->date;
             $this->place = $event->place;
-            $this->category = $event->category;
+            $this->category_id = $event->category_id;
             $this->available_places = $event->available_places;
+            $this->ticket_price = $event->ticket_price;
         }else{
             dd('id is not exist');
         }
@@ -104,11 +110,12 @@ class ManageEvents extends Component
             'user_id' => $validatedData['user_id'],
             'name' => $validatedData['name'],
             'description' => $validatedData['description'],
+            'category_id' => $validatedData['category_id'],
             'image' => $validatedData['image'],
             'date' => $validatedData['date'],
             'place' => $validatedData['place'],
-            'category' => $validatedData['category'],
             'available_places' => $validatedData['available_places'],
+            'ticket_price' => $validatedData['ticket_price']
         ]);
 
         session()->flash('message','Event Updated Successfully');
@@ -127,9 +134,9 @@ class ManageEvents extends Component
         $this->description = '';
         $this->date = null;
         $this->place = '';
-        $this->category = '';
         $this->available_places = '';
         $this->acceptance = '';
+        $this->ticket_price = null;
     }
 
     /*************** event popup delete form ***************/

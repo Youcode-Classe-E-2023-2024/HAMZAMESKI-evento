@@ -7,6 +7,7 @@ use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\OrganizerSubController;
 use App\Http\Controllers\ManageEventController;
 
+use App\Models\Event;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,7 @@ Route::get('/', function () {
 });
 
 /* main route */
-Route::get('/main', [MainController::class, 'index'])->name('main')->middleware('auth');
+Route::get('/home', [MainController::class, 'index'])->name('main')->middleware('auth');
 
 /* auth route */
 Route::get('/register', [AuthController::class, 'register'])->name('register')->middleware('guest');
@@ -60,7 +61,7 @@ Route::get('/subscribe', function () {
 /* manage event route */
 Route::get('/manageEvents', function () {
     $black_hover = 'Manage events';
-    return view('manage-events', compact('black_hover'));
+    return view('event.manage-events', compact('black_hover'));
 
 })->name('manage-events');
 
@@ -70,3 +71,13 @@ Route::get('/manage-categories', function () {
     return view('manage-categories', compact('black_hover'));
 
 })->name('manage-categories');
+
+/* event details */
+//Route::get('/event-details/{event}', [ManageEventController::class, 'event_details'])->name('event-details');
+
+Route::get('/event-details/{event}', function (Event $event) {
+    $black_hover = 'Home';
+    return view('livewire.event-details', compact('event', 'black_hover'));
+
+})->name('event-details');
+

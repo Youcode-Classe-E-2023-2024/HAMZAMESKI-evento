@@ -10,7 +10,7 @@
         <section class="mt-10 w-full">
             <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
                 <!-- Start coding here -->
-                <div class="backdrop-blur-sm relative shadow-md sm:rounded-lg overflow-hidden border-black border-solid border-[.5px]" style="background-color: rgba(0, 0, 0, 0.403);">
+                <div class="backdrop-blur-sm relative shadow-md sm:rounded-lg overflow-hidden border-pink-500 border-solid border-[.5px]" style="background-color: rgba(0, 0, 0, 0.403);">
                     <div class="flex items-center justify-between d p-4">
                         <div class="flex">
                             <div class="relative">
@@ -63,7 +63,7 @@
                             @foreach($events as $event)
                                 <tr  class="border-b dark:border-gray-700">
                                     <td scope="col" class="px-4 py-3 text-white" >{{ $event->name }}</td>
-                                    <td scope="col" class="px-4 py-3 text-white">{{ $event->category }}</td>
+                                    <td scope="col" class="px-4 py-3 text-white">{{ \App\Models\Category::find($event->category_id)->name }}</td>
                                     <td scope="col" class="px-4 py-3 text-white">{{ $event->date }}</td>
                                     <td>
                                         <button type="button" data-bs-toggle="modal" data-bs-target="#updateAcceptanceModal" wire:click="editAcceptance({{$event->id}})" class="btn  {{ $event->acceptance == 'manual'? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600' }}">

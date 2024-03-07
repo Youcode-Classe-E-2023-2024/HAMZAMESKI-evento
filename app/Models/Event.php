@@ -15,8 +15,9 @@ class Event extends Model
         'image',
         'date',
         'place',
-        'category',
+        'category_id',
         'available_places',
+        'ticket_price',
         'acceptance',
         'nmb_reservations'
     ];

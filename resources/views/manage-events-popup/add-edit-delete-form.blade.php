@@ -37,13 +37,21 @@
                     </div>
                     <div class="mb-3">
                         <label>Event Category</label>
-                        <input type="text" wire:model="category" class="form-control">
-                        @error('category') <span class="text-danger">{{ $message }}</span> @enderror
+                        <select id="event_category" wire:model="category_id" class="form-control">
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label>Available places</label>
                         <input type="number" wire:model="available_places" class="form-control">
                         @error('available_places') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label>Ticket Price</label>
+                        <input type="number" wire:model="ticket_price" class="form-control">
+                        @error('ticket_price') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -56,7 +64,7 @@
     </div>
 </div>
 
-{{-- update rss item --}}
+{{-- update event modal --}}
 <div wire:ignore.self class="modal fade" id="updateEventModal" tabindex="-1" aria-labelledby="updateEventModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
@@ -97,13 +105,21 @@
                     </div>
                     <div class="mb-3">
                         <label>Event Category</label>
-                        <input type="text" wire:model="category" class="form-control">
-                        @error('category') <span class="text-danger">{{ $message }}</span> @enderror
+                        <select id="event_category" wire:model="category_id" class="form-control">
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label>Available places</label>
                         <input type="number" wire:model="available_places" class="form-control">
                         @error('available_places') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label>Ticket Price</label>
+                        <input type="number" wire:model="ticket_price" class="form-control">
+                        @error('ticket_price') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -116,7 +132,7 @@
     </div>
 </div>
 
-{{-- delete rss item Modal--}}
+{{-- delete event Modal--}}
 <div wire:ignore.self class="modal fade" id="deleteEventModal" tabindex="-1" aria-labelledby="deleteEventModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
