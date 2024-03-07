@@ -12,7 +12,7 @@
             </div>
             <form wire:submit.prevent="confirmReservation">
                 <div class="modal-body">
-                    <h4>Are you sure you want to reserve at that event?</h4>
+                    <h4>Confirm ticket reservaion for that event</h4>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn text-white btn hover:bg-gray-600 bg-gray-500 border-0" wire:click="closeModal"

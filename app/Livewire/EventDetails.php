@@ -3,31 +3,55 @@
 namespace App\Livewire;
 
 use App\Models\Event;
-
 use Livewire\Component;
+use App\Models\Reservation;
 
 class EventDetails extends Component
 {
-    public $event;
+    public $event, $event_id, $user_id;
+
+    protected function rules()
+    {
+        return [
+            'user_id' => 'required',
+            'event_id' => 'required'
+        ];
+    }
 
     public function render()
     {
         return view('livewire.event-details');
     }
 
-    /*************** reserve ticket form ***************/
-     public function reserveTicket(int $event_id)
-     {
-         dd('reserved');
-         $this->event_id = $event_id;
-     }
+    /*************** Reserve Ticket Form ***************/
+    public function reserveTicket(int $event_id)
+    {
+        $this->event_id = $event_id;
+        $this->user_id = auth()->id();
+    }
 
     public function confirmReservation()
     {
-        dd('reserved');
-//        Event::find($this->event_id)->delete();
-//        session()->flash('message','Event Deleted Successfully');
-//        $this->dispatch('close-modal');
+        $this->validate(); // Validate user_id and event_id
+
+        $existingReservation = Reservation::where('user_id', $this->user_id)
+            ->where('event_id', $this->event_id)
+            ->first();
+
+        if ($existingReservation) {
+            session()->flash('message', 'You have already reserved a ticket for this event.');
+        } else {
+            Reservation::create([
+                'user_id' => $this->user_id,
+                'event_id' => $this->event_id
+            ]);
+
+            session()->flash('message', 'Reservation Handled Successfully');
+
+            $this->dispatch('close-modal');
+        }
+
+        $this->resetInput(); // Reset input values after reservation
     }
 
     public function closeModal()
@@ -37,5 +61,7 @@ class EventDetails extends Component
 
     public function resetInput()
     {
+        $this->event_id = null;
+        $this->user_id = null;
     }
 }
