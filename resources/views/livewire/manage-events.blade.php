@@ -10,7 +10,7 @@
         <section class="mt-10 w-full">
             <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
                 <!-- Start coding here -->
-                <div class="backdrop-blur-sm relative shadow-md sm:rounded-lg overflow-hidden border-pink-500 border-solid border-[.5px]" style="background-color: rgba(0, 0, 0, 0.403);">
+                <div class="backdrop-blur-sm relative shadow-md sm:rounded-lg overflow-hidden border-pink-500 border-solid border-[.5px]" style="background-color: rgba(0, 0, 0, 0.203);">
                     <div class="flex items-center justify-between d p-4">
                         <div class="flex">
                             <div class="relative">

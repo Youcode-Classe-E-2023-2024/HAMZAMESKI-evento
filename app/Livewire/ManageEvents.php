@@ -123,22 +123,6 @@ class ManageEvents extends Component
         $this->dispatch('close-modal');
     }
 
-    public function closeModal()
-    {
-        $this->resetInput();
-    }
-
-    public function resetInput()
-    {
-        $this->name = '';
-        $this->description = '';
-        $this->date = null;
-        $this->place = '';
-        $this->available_places = '';
-        $this->acceptance = '';
-        $this->ticket_price = null;
-    }
-
     /*************** event popup delete form ***************/
     public function deleteEvent(int $event_id)
     {
@@ -178,5 +162,21 @@ class ManageEvents extends Component
         session()->flash('message', 'Event acceptance Updated Successfully');
 
         $this->dispatch('close-modal');
+    }
+
+    public function closeModal()
+    {
+        $this->resetInput();
+    }
+
+    public function resetInput()
+    {
+        $this->name = '';
+        $this->description = '';
+        $this->date = null;
+        $this->place = '';
+        $this->available_places = '';
+        $this->acceptance = '';
+        $this->ticket_price = null;
     }
 }
