@@ -1,9 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgetPasswordController;
+use App\Http\Controllers\OrganizerSubController;
+use App\Http\Controllers\ManageEventController;
 
+use App\Models\Event;
+use App\Models\Reservation;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +26,7 @@ Route::get('/', function () {
 });
 
 /* main route */
-Route::get('/main', function () {
-    return view('main');
-})->name('main')->middleware('auth');
+Route::get('/home', [MainController::class, 'index'])->name('main')->middleware('auth');
 
 /* auth route */
 Route::get('/register', [AuthController::class, 'register'])->name('register')->middleware('guest');
@@ -38,7 +41,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 
 Route::delete('/user/delete', [AuthController::class, 'destroy'])->name('user.delete');
 
-// forget-password route
+/* forget-password route */
 Route::get('/forget-password', [ForgetPasswordController::class, 'forgetPassword'])->name('forget.password');
 
 Route::post('/forget-password', [ForgetPasswordController::class, 'forgetPasswordPost'])->name('forget.password.post');
@@ -47,3 +50,33 @@ Route::get('/reset-password/{token}', [ForgetPasswordController::class, 'resetPa
 
 Route::post('/reset-password', [ForgetPasswordController::class, 'resetPasswordPost'])->name('reset.password.post');
 
+/* subscribe route */
+Route::post('/subscribe/store', [OrganizerSubController::class, 'subscribe'])->name('subscribe.store');
+
+Route::get('/subscribe', function () {
+    $black_hover = 'Be an organizer';
+    return view('subscribe', compact('black_hover'));
+
+})->name('subscribe');
+
+/* manage event route */
+Route::get('/manageEvents', function () {
+    $black_hover = 'Manage events';
+    $reservers = Reservation::where('pending', '1')->get();
+    return view('event.manage-events', compact('black_hover', 'reservers'));
+
+})->name('manage-events');
+
+/* manage categories */
+Route::get('/manage-categories', function () {
+    $black_hover = 'Manage categories';
+    return view('manage-categories', compact('black_hover'));
+
+})->name('manage-categories');
+
+/* event details */
+Route::get('/event-details/{event}', function (Event $event) {
+    $black_hover = 'Home';
+    return view('event.event-details', compact('event', 'black_hover'));
+
+})->name('event-details');

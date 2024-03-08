@@ -1,14 +1,9 @@
 @include('layout.header')
-<div class="container">
+<div>
     @include('layout.side-bar')
     <!-- ========================= Main ==================== -->
     <div class="main">
-        <div class="topbar">
-            <div class="toggle">
-                <ion-icon name="menu-outline"></ion-icon>
-            </div>
-        </div>
-        <div>
+        <div class="h-screen overflow-auto" style="background-image: url('http://127.0.0.1:8000/storage/images/bg.jpg'); background-size: cover">
             @yield('content')
         </div>
     </div>
