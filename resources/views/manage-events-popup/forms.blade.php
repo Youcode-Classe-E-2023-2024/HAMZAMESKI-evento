@@ -4,7 +4,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="eventModalLabel">Create Student</h5>
+                <h5 class="modal-title font-bold" id="eventModalLabel">Create Event</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                         wire:click="closeModal"></button>
             </div>
@@ -70,7 +70,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header flex justify-between">
-                <h5 class="modal-title" id="updateEventModalLabel">Edit Student</h5>
+                <h5 class="modal-title font-bold" id="eventModalLabel">Edit Event</h5>
                 <button type="button" data-bs-dismiss="modal" wire:click="closeModal"
                         aria-label="Close">
                     <div class="h-[20px] w-[20px]" style="background-image: url('http://127.0.0.1:8000/storage/images/close-outline.svg'); background-size: cover; background-position: center; "></div>
@@ -165,7 +165,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header flex justify-between">
-                <h5 class="modal-title" id="updateAcceptanceModal">Edit Student</h5>
+                <h5 class="modal-title font-bold" id="updateAcceptanceModal">Acceptance system</h5>
                 <button type="button" data-bs-dismiss="modal" wire:click="closeModal"
                         aria-label="Close">
                     <div class="h-[20px] w-[20px]" style="background-image: url('http://127.0.0.1:8000/storage/images/close-outline.svg'); background-size: cover; background-position: center; "></div>
@@ -174,7 +174,6 @@
             <form wire:submit.prevent="updateAcceptance">
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label>Acceptance system</label>
                         <select wire:model="acceptance" class="form-control">
                             <option value="automatic">Automatic</option>
                             <option value="manual">Manual</option>
@@ -198,24 +197,23 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="acceptReserversModalLabel">Create Student</h5>
+                <h5 class="modal-title font-bold" id="acceptReserversModalLabel">Reservation Orders:</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                         wire:click="closeModal"></button>
             </div>
             <form wire:submit.prevent="acceptReservers">
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label>Reservation Orders</label>
-
-                        @foreach($reservers as $reserver)
-                            <div class="flex gap-2">
-                                <input type="checkbox" wire:model="selectedReservers.{{ $reserver->id }}" class="form-check-input">
-                                <div>{{ App\Models\User::where('id', $reserver->user_id)->first()->name }}</div>
+                        @forelse($reservers as $reserver)
+                            <div class="flex gap-2 mt-1">
+                                <input type="checkbox" id="checkbox_{{ $reserver->id }}" wire:model="selectedReservers" value="{{ $reserver->user_id }}" class="form-check-input">
+                                <label for="checkbox_{{ $reserver->id }}" class="cursor-pointer">
+                                    <div>{{ App\Models\User::where('id', $reserver->user_id)->first()->name }}</div>
+                                </label>
                             </div>
-                        @endforeach
-
-
-                        @error('name') <span class="text-danger">{{ $message }}</span> @enderror
+                        @empty
+                            <div>No reservation orders found</div>
+                        @endforelse
                     </div>
 
                 </div>

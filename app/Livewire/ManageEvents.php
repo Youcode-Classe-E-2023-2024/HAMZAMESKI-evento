@@ -60,7 +60,8 @@ class ManageEvents extends Component
             'place' => 'required',
             'date' => 'required|date',
             'available_places' => 'required|integer',
-            'ticket_price' => 'required'
+            'ticket_price' => 'required',
+            'selectedReservers.*' => 'exists:reservations,user_id'
         ];
     }
 
@@ -185,6 +186,7 @@ class ManageEvents extends Component
     /*************** accept reservers popup form ****************/
     public $eventId;
     public $reservers;
+    public $selectedReservers = [];
 
     public function handleReservers($eventId)
     {
@@ -192,6 +194,16 @@ class ManageEvents extends Component
         $this->reservers = Reservation::where('event_id', $eventId)->where('pending', '1')->get();
     }
 
-    public function acceptReservers () {
+    public function acceptReservers()
+    {
+//        dd($this->selectedReservers);
+        Reservation::where('event_id', $this->eventId)
+            ->whereIn('user_id', array_keys($this->selectedReservers))
+            ->update(['pending' => '0']);
+
+        $this->selectedReservers = [];
+
+        // Close the modal
+        $this->dispatch('close-modal');
     }
 }
