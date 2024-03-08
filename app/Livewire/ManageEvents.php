@@ -197,9 +197,12 @@ class ManageEvents extends Component
     public function acceptReservers()
     {
 //        dd($this->selectedReservers);
-        Reservation::where('event_id', $this->eventId)
-            ->whereIn('user_id', array_keys($this->selectedReservers))
-            ->update(['pending' => '0']);
+        // second code
+        for($i = 0; $i < count($this->selectedReservers); $i++) {
+            Reservation::where('event_id', $this->eventId)
+                ->where('user_id', $this->selectedReservers[$i])
+                ->update(['pending' => '0']);
+        }
 
         $this->selectedReservers = [];
 
