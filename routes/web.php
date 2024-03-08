@@ -8,6 +8,7 @@ use App\Http\Controllers\OrganizerSubController;
 use App\Http\Controllers\ManageEventController;
 
 use App\Models\Event;
+use App\Models\Reservation;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,7 +62,8 @@ Route::get('/subscribe', function () {
 /* manage event route */
 Route::get('/manageEvents', function () {
     $black_hover = 'Manage events';
-    return view('event.manage-events', compact('black_hover'));
+    $reservers = Reservation::where('pending', '1')->get();
+    return view('event.manage-events', compact('black_hover', 'reservers'));
 
 })->name('manage-events');
 
@@ -73,11 +75,8 @@ Route::get('/manage-categories', function () {
 })->name('manage-categories');
 
 /* event details */
-//Route::get('/event-details/{event}', [ManageEventController::class, 'event_details'])->name('event-details');
-
 Route::get('/event-details/{event}', function (Event $event) {
     $black_hover = 'Home';
     return view('event.event-details', compact('event', 'black_hover'));
 
 })->name('event-details');
-

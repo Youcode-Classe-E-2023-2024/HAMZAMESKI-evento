@@ -1,4 +1,4 @@
 @extends('layout.layout')
 @section('content')
-    <livewire:manage-events/>
+    <livewire:manage-events :reservers="$reservers"/>
 @endsection

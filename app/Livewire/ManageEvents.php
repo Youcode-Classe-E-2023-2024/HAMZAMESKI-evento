@@ -8,6 +8,8 @@ use App\Models\Event;
 
 use App\Models\Category;
 
+use App\Models\Reservation;
+
 use Livewire\WithPagination;
 
 use Livewire\WithFileUploads;
@@ -178,5 +180,18 @@ class ManageEvents extends Component
         $this->available_places = '';
         $this->acceptance = '';
         $this->ticket_price = null;
+    }
+
+    /*************** accept reservers popup form ****************/
+    public $eventId;
+    public $reservers;
+
+    public function handleReservers($eventId)
+    {
+        $this->eventId = $eventId;
+        $this->reservers = Reservation::where('event_id', $eventId)->where('pending', '1')->get();
+    }
+
+    public function acceptReservers () {
     }
 }

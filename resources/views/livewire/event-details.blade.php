@@ -11,8 +11,15 @@
                         </div>
                         <div class="flex -mx-2 mb-4">
                             <div class="w-1/2 px-2">
-                                @if(App\Models\Reservation::where('user_id', auth()->id())->where('event_id', $event->id)->first())
-                                    <div class="w-full bg-green-300 text-white py-2 px-4 rounded-full font-bold">Ticket Reserved</div>
+                                @if($event->available_places <= 0)
+                                    <div class="w-full bg-yellow-300 text-white py-2 px-4 rounded-full font-bold">Sold Out</div>
+
+                                @elseif(App\Models\Reservation::where('user_id', auth()->id())->where('event_id', $event->id)->where('pending', '1')->first())
+                                    <div class="w-full bg-green-300 text-white py-2 px-4 rounded-full font-bold">Pending</div>
+
+                                @elseif(App\Models\Reservation::where('user_id', auth()->id())->where('event_id', $event->id)->where('pending', '2')->first())
+                                    <div class="w-full bg-pink-300 text-white py-2 px-4 rounded-full font-bold">Ticket Reserved</div>
+
                                 @else
                                     <button class="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-full font-bold" data-bs-toggle="modal" data-bs-target="#confirmReservationModal" wire:click="reserveTicket({{$event->id}})">Reserve Ticket</button>
                                 @endif

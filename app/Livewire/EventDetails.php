@@ -32,7 +32,7 @@ class EventDetails extends Component
 
     public function confirmReservation()
     {
-        $this->validate(); // Validate user_id and event_id
+        $this->validate();
 
         $existingReservation = Reservation::where('user_id', $this->user_id)
             ->where('event_id', $this->event_id)
@@ -46,12 +46,19 @@ class EventDetails extends Component
                 'event_id' => $this->event_id
             ]);
 
+
+//            // increase number of reservations by one
+//            Event::where('id', $this->event_id)->increment('nmb_reservations', 1);
+//
+//            // decrease number of reservations by one
+//            Event::where('id', $this->event_id)->decrement('available_places', 1);
+
             session()->flash('message', 'Reservation Handled Successfully');
 
             $this->dispatch('close-modal');
         }
 
-        $this->resetInput(); // Reset input values after reservation
+        $this->resetInput();
     }
 
     public function closeModal()

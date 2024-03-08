@@ -191,3 +191,40 @@
         </div>
     </div>
 </div>
+
+{{-- Accept reservers --}}
+<div wire:ignore.self class="modal fade" id="acceptReserversModal" tabindex="-1" aria-labelledby="acceptReserversModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="acceptReserversModalLabel">Create Student</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        wire:click="closeModal"></button>
+            </div>
+            <form wire:submit.prevent="acceptReservers">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label>Reservation Orders</label>
+
+                        @foreach($reservers as $reserver)
+                            <div class="flex gap-2">
+                                <input type="checkbox" wire:model="selectedReservers.{{ $reserver->id }}" class="form-check-input">
+                                <div>{{ App\Models\User::where('id', $reserver->user_id)->first()->name }}</div>
+                            </div>
+                        @endforeach
+
+
+                        @error('name') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" wire:click="closeModal"
+                            data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Accept Reservations order</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

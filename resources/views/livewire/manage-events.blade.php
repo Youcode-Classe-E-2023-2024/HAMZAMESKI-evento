@@ -5,7 +5,7 @@
         </button>
     </h4>
     <div id="dashboard-container" class=" flex items-center justify-center">
-        @include('manage-events-popup.add-edit-delete-form')
+        @include('manage-events-popup.forms')
 
         <section class="mt-10 w-full">
             <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
@@ -45,6 +45,9 @@
                                     acceptance
                                 </th>
                                 <th scope="col" class="px-4 py-3">
+                                    Reservers
+                                </th>
+                                <th scope="col" class="px-4 py-3">
                                     available places
                                 </th>
                                 <th scope="col" class="px-4 py-3">
@@ -69,6 +72,19 @@
                                         <button type="button" data-bs-toggle="modal" data-bs-target="#updateAcceptanceModal" wire:click="editAcceptance({{$event->id}})" class="btn  {{ $event->acceptance == 'manual'? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600' }}">
                                             {{ $event->acceptance }}
                                         </button>
+                                    </td>
+                                    <td>
+                                        @if($event->acceptance == 'automatic')
+                                            <div class="flex items-center justify-center">
+                                                <span class="font-bold">-</span>
+                                            </div>
+                                        @else
+                                            <div class="flex items-center justify-center">
+                                                <button type="button" data-bs-toggle="modal" data-bs-target="#acceptReserversModal" wire:click="handleReservers({{$event->id}})" class="btn btn-primary">
+                                                    Display
+                                                </button>
+                                            </div>
+                                        @endif
                                     </td>
                                     <td scope="col" class="px-4 py-3 text-white">{{ $event->available_places }}</td>
                                     <td scope="col" class="px-4 py-3 text-white">{{ $event->nmb_reservations }}</td>
@@ -118,6 +134,7 @@
             $('#updateEventModal').modal('hide');
             $('#deleteEventModal').modal('hide');
             $('#updateAcceptanceModal').modal('hide');
+            $('#acceptReserversModal').modal('hide');
         })
     </script>
 </div>
