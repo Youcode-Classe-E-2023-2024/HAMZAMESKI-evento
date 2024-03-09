@@ -10,7 +10,7 @@
                         <h1 class="mt-0 mb-12 text-4xl text-white font-bold tracking-tight md:text-5xl xl:text-6xl">
                             Be an Organizer <br /><span class="text-pink-500 dark:text-danger-400">& enjoy adventure?</span>
                         </h1>
-                        @if(auth()->user()->hasRole('denied_for_user'))
+                        @if(auth()->user()->hasAnyRole(['organizer_lvl1', 'organizer_lvl2', 'organizer_lvl3']))
                             <div class="mb-6 flex-row md:mb-0 md:flex">
                                 <div
                                     class="inline-block border-[1px] border-solid border-orange-500 bg-orange-500 px-7 pt-3 pb-2.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#dc4c64] transition duration-150 ease-in-out hover:bg-danger-600 hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:bg-danger-600 focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:outline-none focus:ring-0 active:bg-danger-700 active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(220,76,100,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)]"

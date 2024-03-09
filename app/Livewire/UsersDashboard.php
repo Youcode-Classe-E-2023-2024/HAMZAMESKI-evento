@@ -115,23 +115,22 @@ class UsersDashboard extends Component
 
         if($this->role == 'organizer-lvl1') {
             $user->assignRole('organizer_lvl1');
-            $user->assignRole('denied_for_user');
+//            $user->assignRole('denied_for_user');
 
         }elseif($this->role == 'organizer-lvl2') {
             $user->assignRole('organizer_lvl2');
-            $user->assignRole('denied_for_user');
+//            $user->assignRole('denied_for_user');
 
         }elseif($this->role == 'organizer-lvl3') {
             $user->assignRole('organizer_lvl3');
-            $user->assignRole('denied_for_user');
+//            $user->assignRole('denied_for_user');
 
         }elseif($this->role == 'organizer-lvl4') {
             $user->assignRole('organizer_lvl4');
 
         }elseif($this->role == 'user') {
             $user->assignRole('user');
-            $user->assignRole('denied_for_user');
-
+//            $user->assignRole('denied_for_user');
         }
 
         session()->flash('message', 'Role Updated Successfully');

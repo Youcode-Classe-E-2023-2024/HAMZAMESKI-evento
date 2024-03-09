@@ -55,23 +55,23 @@
 
                         @foreach($users as $user)
                             @if(!$user->hasRole('admin'))
-                                @if($user->roles->first()->name == 'user')
+                                @if($user->roles->last()->name == 'user')
                                     @php
                                         $color = 'gray'
                                     @endphp
-                                @elseif($user->roles->first()->name == 'organizer_lvl1')
+                                @elseif($user->roles->last()->name == 'organizer_lvl1')
                                     @php
                                         $color = 'yellow'
                                     @endphp
-                                @elseif($user->roles->first()->name == 'organizer_lvl2')
+                                @elseif($user->roles->last()->name == 'organizer_lvl2')
                                     @php
                                         $color = 'orange'
                                     @endphp
-                                @elseif($user->roles->first()->name == 'organizer_lvl3')
+                                @elseif($user->roles->last()->name == 'organizer_lvl3')
                                     @php
                                         $color = 'red'
                                     @endphp
-                                @elseif($user->roles->first()->name == 'organizer_lvl4')
+                                @elseif($user->roles->last()->name == 'organizer_lvl4')
                                     @php
                                         $color = 'green'
                                     @endphp
