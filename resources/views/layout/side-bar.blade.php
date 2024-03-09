@@ -70,7 +70,7 @@
         </li>
 
         <li class="{{ $black_hover == 'Profile' ? 'black_hover': '' }}">
-            <a href="#">
+            <a href="{{ route('profile.edit') }}">
                         <span class="icon">
                             <ion-icon name="person-outline"></ion-icon>
                         </span>

@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\OrganizerSubController;
 use App\Http\Controllers\ManageEventController;
+use App\Http\Controllers\ProfileController;
 
 use App\Models\Event;
 use App\Models\Reservation;
@@ -98,3 +99,17 @@ Route::get('/manage-users', function () {
 
     return view('admin.manage-users', compact('black_hover'));
 })->name('manage-users');
+
+/* Profile Route */
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+
+    Route::put('/profile/userInfo', [ProfileController::class, 'userInfoUpdate'])->name('profile.userInfo.update');
+
+    Route::put('/profile/password', [ProfileController::class, 'passwordUpdate'])->name('profile.password.update');
+
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Trend Route:
+    Route::get('/Trend', [TrendController::class, 'index'])->name('news.trend');
+});
