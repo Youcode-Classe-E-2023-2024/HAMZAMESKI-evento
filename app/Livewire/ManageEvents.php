@@ -44,6 +44,7 @@ class ManageEvents extends Component
     {
         $events = Event::search($this->search)
             ->orderByDesc('updated_at')
+            ->where('user_id', auth()->id())
             ->paginate($this->perPage);
 
         $categories = Category::latest()->get();
