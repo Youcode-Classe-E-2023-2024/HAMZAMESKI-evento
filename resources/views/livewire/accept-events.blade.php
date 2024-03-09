@@ -1,5 +1,5 @@
 <div>
-    <div id="dashboard-container" class=" flex items-center justify-center">
+    <div id="dashboard-container" class="flex items-center justify-center">
         @include('accept-events-popup.forms')
 
         <section class="mt-10 w-full">
