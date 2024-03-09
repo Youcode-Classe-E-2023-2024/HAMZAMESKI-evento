@@ -16,19 +16,24 @@
                             <img class="w-full h-full object-cover" src="http://127.0.0.1:8000/storage/images/{{ $event->image }}" alt="Event Image">
                         </div>
                         <div class="flex -mx-2 mb-4">
-                            <div class="w-1/2 px-2">
+                            <div class="w-1/2 px-2 flex w-full">
                                 @if($event->available_places <= 0)
-                                    <div class="w-full bg-yellow-300 text-white py-2 px-4 rounded-full font-bold">Sold Out</div>
+                                    <div class="bg-pink-400 text-white py-2 px-4 rounded-sm font-bold flex-shrink">Sold Out</div>
 
                                 @elseif(App\Models\Reservation::where('user_id', auth()->id())->where('event_id', $event->id)->where('pending', '1')->first())
-                                    <div class="w-full bg-green-300 text-white py-2 px-4 rounded-full font-bold">Pending</div>
+                                    <div class="bg-green-300 text-white py-2 px-4 rounded-sm font-bold flex-shrink">Pending</div>
 
                                 @elseif(App\Models\Reservation::where('user_id', auth()->id())->where('event_id', $event->id)->where('pending', '0')->first())
-                                    <div class="w-full bg-pink-300 text-white py-2 px-4 rounded-full font-bold">Ticket Reserved</div>
+                                    <div class="bg-yellow-400 text-white py-2 px-4 rounded-sm font-bold flex-shrink">Ticket Reserved</div>
 
                                 @else
-                                    <button class="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-full font-bold" data-bs-toggle="modal" data-bs-target="#confirmReservationModal" wire:click="reserveTicket({{$event->id}})">Reserve Ticket</button>
+                                    <button class="bg-green-500 text-white py-2 px-4 rounded-sm font-bold flex-shrink" data-bs-toggle="modal" data-bs-target="#confirmReservationModal" wire:click="reserveTicket({{$event->id}})">Reserve Ticket</button>
                                 @endif
+                                <div class="flex items-center justify-center border border-gray-500 px-2">
+                                    <p class="text-gray-300 text-sm flex-grow">
+                                        remember you can generate a ticket just one time!
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
