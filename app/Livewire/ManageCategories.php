@@ -8,8 +8,6 @@ use App\Models\Category;
 
 use Livewire\WithPagination;
 
-use Livewire\WithFileUploads;
-
 class ManageCategories extends Component
 {
     use WithPagination;
@@ -85,6 +83,21 @@ class ManageCategories extends Component
         $this->dispatch('close-modal');
     }
 
+    /*************** category popup delete form ***************/
+    public function deleteCategory(int $category_id)
+    {
+        $this->category_id = $category_id;
+    }
+
+    public function destroyCategory()
+    {
+        Category::find($this->category_id)->delete();
+        session()->flash('message','Category Deleted Successfully');
+        $this->dispatch('close-modal');
+    }
+
+
+
     public function closeModal()
     {
         $this->resetInput();
@@ -99,18 +112,5 @@ class ManageCategories extends Component
         $this->category = '';
         $this->available_places = '';
         $this->acceptance = '';
-    }
-
-    /*************** category popup delete form ***************/
-    public function deleteCategory(int $category_id)
-    {
-        $this->category_id = $category_id;
-    }
-
-    public function destroyCategory()
-    {
-        Category::find($this->category_id)->delete();
-        session()->flash('message','Category Deleted Successfully');
-        $this->dispatch('close-modal');
     }
 }

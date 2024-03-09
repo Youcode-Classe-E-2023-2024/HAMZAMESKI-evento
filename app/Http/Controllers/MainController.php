@@ -10,7 +10,7 @@ class MainController extends Controller
     public function index() {
 
         $black_hover = 'home';
-        $events = Event::latest()->get();
+        $events = Event::latest()->where('is_published', '1')->get();
 
         return view('main', compact('black_hover', 'events'));
     }
