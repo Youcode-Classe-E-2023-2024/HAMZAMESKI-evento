@@ -86,7 +86,6 @@
                             <option value="organizer-lvl2">organizer-lvl2 (add favorits + edit event)</option>
                             <option value="organizer-lvl3">organizer-lvl3 (add favorits + edit event + delete event)</option>
                             <option value="organizer-lvl4">organizer-lvl4 (CRUD event + accepte reservations + see statistics)</option>
-                            {{--                            <option value="admin">admin</option>--}}
                         </select>
                         @error('role') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
