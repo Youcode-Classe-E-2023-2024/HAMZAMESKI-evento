@@ -3,8 +3,13 @@
 namespace App\Livewire;
 
 use App\Models\Event;
+
+use App\Models\User;
 use Livewire\Component;
+
 use App\Models\Reservation;
+
+use Illuminate\Support\Facades\Mail;
 
 class EventDetails extends Component
 {
@@ -49,6 +54,14 @@ class EventDetails extends Component
                     'event_id' => $this->event_id,
                     'pending' => '0'
                 ]);
+
+                $code = 12321;
+                $userId = $this->user_id;
+                Mail::send('emails.ticket', compact('code'), function($message) use ($userId) {
+                    $user = auth()->user();
+                    $message->to($user->email);
+                    $message->subject('Event Ticket');
+                });
 
                 // increase number of reservations by one
                 Event::where('id', $this->event_id)->increment('nmb_reservations', 1);
