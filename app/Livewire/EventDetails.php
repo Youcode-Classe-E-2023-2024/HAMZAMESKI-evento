@@ -41,17 +41,26 @@ class EventDetails extends Component
         if ($existingReservation) {
             session()->flash('message', 'You have already reserved a ticket for this event.');
         } else {
-            Reservation::create([
-                'user_id' => $this->user_id,
-                'event_id' => $this->event_id
-            ]);
 
+            // if the event is automatically accept reservations orders
+            if (Event::where('id', $this->event_id)->first()->acceptance == 'automatic') {
+                Reservation::create([
+                    'user_id' => $this->user_id,
+                    'event_id' => $this->event_id,
+                    'pending' => '0'
+                ]);
 
-//            // increase number of reservations by one
-//            Event::where('id', $this->event_id)->increment('nmb_reservations', 1);
-//
-//            // decrease number of reservations by one
-//            Event::where('id', $this->event_id)->decrement('available_places', 1);
+                // increase number of reservations by one
+                Event::where('id', $this->event_id)->increment('nmb_reservations', 1);
+
+                // decrease number of reservations by one
+                Event::where('id', $this->event_id)->decrement('available_places', 1);
+            }else {
+                Reservation::create([
+                    'user_id' => $this->user_id,
+                    'event_id' => $this->event_id
+                ]);
+            }
 
             session()->flash('message', 'Reservation Handled Successfully');
 

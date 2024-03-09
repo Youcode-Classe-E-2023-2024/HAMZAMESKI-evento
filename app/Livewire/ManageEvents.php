@@ -4,15 +4,19 @@ namespace App\Livewire;
 
 use Livewire\Component;
 
+use Livewire\WithPagination;
+
+use Livewire\WithFileUploads;
+
+use App\Models\User;
+
 use App\Models\Event;
 
 use App\Models\Category;
 
 use App\Models\Reservation;
 
-use Livewire\WithPagination;
-
-use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Mail;
 
 class ManageEvents extends Component
 {
@@ -196,12 +200,31 @@ class ManageEvents extends Component
 
     public function acceptReservers()
     {
-//        dd($this->selectedReservers);
-        // second code
         for($i = 0; $i < count($this->selectedReservers); $i++) {
             Reservation::where('event_id', $this->eventId)
                 ->where('user_id', $this->selectedReservers[$i])
                 ->update(['pending' => '0']);
+        }
+
+        $code = 12321;
+
+        // Send ticket through to reservers emails
+        for($i = 0; $i < count($this->selectedReservers); $i++) {
+            if (Event::where('id', $this->eventId)->first()->available_places > 0) {
+                $userId = $this->selectedReservers[$i];
+
+                Mail::send('emails.ticket', compact('code'), function($message) use ($userId) {
+                    $user = User::find($userId);
+                    $message->to($user->email);
+                    $message->subject('Event Ticket');
+                });
+
+                // increase number of reservations by one
+                Event::where('id', $this->eventId)->increment('nmb_reservations', 1);
+
+                // decrease number of reservations by one
+                Event::where('id', $this->eventId)->decrement('available_places', 1);
+            }
         }
 
         $this->selectedReservers = [];
