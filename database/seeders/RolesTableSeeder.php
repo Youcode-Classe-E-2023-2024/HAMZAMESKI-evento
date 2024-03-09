@@ -14,6 +14,7 @@ class RolesTableSeeder extends Seeder
     public function run(): void
     {
         $roles = [
+            'user',
             'denied_for_user',
             'organizer_lvl1',
             'organizer_lvl2',

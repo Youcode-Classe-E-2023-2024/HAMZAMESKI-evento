@@ -113,22 +113,24 @@ class UsersDashboard extends Component
 
         $user->syncRoles([]);
 
-        if($this->role == 'member-lvl1') {
-            $user->assignRole('member-lvl1');
+        if($this->role == 'organizer-lvl1') {
+            $user->assignRole('organizer_lvl1');
+            dd($user->hasRole('organizer_lvl1'));
 
-        }elseif($this->role == 'member-lvl2') {
-            $user->assignRole('member-lvl1');
-            $user->assignRole('member-lvl2');
+        }elseif($this->role == 'organizer-lvl2') {
+            $user->assignRole('organizer_lvl2');
 
-        }elseif($this->role == 'member-lvl3') {
-            $user->assignRole('member-lvl1');
-            $user->assignRole('member-lvl2');
-            $user->assignRole('member-lvl3');
+        }elseif($this->role == 'organizer-lvl3') {
+            $user->assignRole('organizer_lvl3');
+
+        }elseif($this->role == 'organizer-lvl4') {
+            $user->assignRole('organizer_lvl4');
+
         }elseif($this->role == 'user') {
             $user->assignRole('user');
         }
 
-        session()->flash('message', 'RSS Item Trend Updated Successfully');
+        session()->flash('message', 'Role Updated Successfully');
 
         $this->dispatch('close-modal');
     }

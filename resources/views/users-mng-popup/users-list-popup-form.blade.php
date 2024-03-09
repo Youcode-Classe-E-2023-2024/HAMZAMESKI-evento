@@ -4,7 +4,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header flex justify-between">
-                <h5 class="modal-title" id="updateUserModalLabel">Edit Student</h5>
+                <h5 class="modal-title" id="updateUserModalLabel font-bold">Update User</h5>
                 <button type="button" data-bs-dismiss="modal" wire:click="closeModal"
                         aria-label="Close">
                     <div class="h-[20px] w-[20px]" style="background-image: url('http://127.0.0.1:8000/storage/images/close-outline.svg'); background-size: cover; background-position: center; "></div>
@@ -71,7 +71,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header flex justify-between">
-                <h5 class="modal-title" id="updateUserRoleModal">Edit Student</h5>
+                <h5 class="modal-title" id="updateUserRoleModal font-bold">Update User Role</h5>
                 <button type="button" data-bs-dismiss="modal" wire:click="closeModal"
                         aria-label="Close">
                     <div class="h-[20px] w-[20px]" style="background-image: url('http://127.0.0.1:8000/storage/images/close-outline.svg'); background-size: cover; background-position: center; "></div>
@@ -80,12 +80,12 @@
             <form wire:submit.prevent="updateUserRole">
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label>RSS item Status</label>
                         <select wire:model="role" class="form-control">
                             <option value="user">user</option>
-                            <option value="member-lvl1">member-lvl1 (add favorits)</option>
-                            <option value="member-lvl2">member-lvl2 (add favorits + see article details)</option>
-                            <option value="member-lvl3">member-lvl3 (add favorits + add comments + see article details)</option>
+                            <option value="organizer-lvl1">organizer-lvl1 (add event)</option>
+                            <option value="organizer-lvl2">organizer-lvl2 (add favorits + edit event)</option>
+                            <option value="organizer-lvl3">organizer-lvl3 (add favorits + edit event + delete event)</option>
+                            <option value="organizer-lvl4">organizer-lvl4 (CRUD event + accepte reservations + see statistics)</option>
                             {{--                            <option value="admin">admin</option>--}}
                         </select>
                         @error('role') <span class="text-danger">{{ $message }}</span> @enderror
