@@ -36,28 +36,32 @@ class AcceptEvents extends Component
             ->where('is_published', '0')
             ->paginate($this->perPage);
 
-        return view('livewire.accept-events',compact('events'));
+        $event = $this->event;
+
+        return view('livewire.accept-events',compact('events', 'event'));
     }
 
-    public $category_id;
+    public $event_id;
 
-    protected function rules()
+    public $event;
+
+    public function displayDetails($event_id)
     {
-        return [
-            'name' => 'required|min:3'
-        ];
+        $this->event = Event::findOrFail($event_id);
     }
 
     /*************** accept event popup form ***************/
-    public function deleteCategory(int $category_id)
+    public function handleEvent(int $event_id)
     {
-        $this->category_id = $category_id;
+        $this->event_id = $event_id;
+        $this->event = Event::where('id', $event_id)->first();
     }
 
-    public function destroyCategory()
+    public function acceptEvent()
     {
-        Category::find($this->category_id)->delete();
-        session()->flash('message','Category Deleted Successfully');
+        Event::find($this->event_id)->update(['is_published' => '1']);
+
+        session()->flash('message','Event Accepted Successfully');
         $this->dispatch('close-modal');
     }
 
