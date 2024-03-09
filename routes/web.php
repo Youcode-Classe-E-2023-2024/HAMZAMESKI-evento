@@ -80,3 +80,10 @@ Route::get('/event-details/{event}', function (Event $event) {
     return view('event.event-details', compact('event', 'black_hover'));
 
 })->name('event-details');
+
+/* accept events */
+Route::get('/accept-events', function () {
+    $black_hover = 'Accept Events';
+    return view('admin.accept-events', compact('black_hover'));
+
+})->name('accept-events');

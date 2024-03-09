@@ -52,6 +52,14 @@
                 <span class="title">Manage categories</span>
             </a>
         </li>
+        <li class="{{ $black_hover == 'Accept Events' ? 'black_hover': '' }}">
+            <a href="{{ route('accept-events') }}">
+                        <span class="icon">
+                            <ion-icon name="hourglass-outline"></ion-icon>
+                        </span>
+                <span class="title">Accept Events</span>
+            </a>
+        </li>
         <li class="{{ $black_hover == 'Manage users' ? 'black_hover': '' }}">
             <a href="#">
                         <span class="icon">

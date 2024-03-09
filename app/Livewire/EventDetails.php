@@ -3,8 +3,13 @@
 namespace App\Livewire;
 
 use App\Models\Event;
+
+use App\Models\User;
 use Livewire\Component;
+
 use App\Models\Reservation;
+
+use Illuminate\Support\Facades\Mail;
 
 class EventDetails extends Component
 {
@@ -41,17 +46,34 @@ class EventDetails extends Component
         if ($existingReservation) {
             session()->flash('message', 'You have already reserved a ticket for this event.');
         } else {
-            Reservation::create([
-                'user_id' => $this->user_id,
-                'event_id' => $this->event_id
-            ]);
 
+            // if the event is automatically accept reservations orders
+            if (Event::where('id', $this->event_id)->first()->acceptance == 'automatic') {
+                Reservation::create([
+                    'user_id' => $this->user_id,
+                    'event_id' => $this->event_id,
+                    'pending' => '0'
+                ]);
 
-//            // increase number of reservations by one
-//            Event::where('id', $this->event_id)->increment('nmb_reservations', 1);
-//
-//            // decrease number of reservations by one
-//            Event::where('id', $this->event_id)->decrement('available_places', 1);
+                $code = 12321;
+                $userId = $this->user_id;
+                Mail::send('emails.ticket', compact('code'), function($message) use ($userId) {
+                    $user = auth()->user();
+                    $message->to($user->email);
+                    $message->subject('Event Ticket');
+                });
+
+                // increase number of reservations by one
+                Event::where('id', $this->event_id)->increment('nmb_reservations', 1);
+
+                // decrease number of reservations by one
+                Event::where('id', $this->event_id)->decrement('available_places', 1);
+            }else {
+                Reservation::create([
+                    'user_id' => $this->user_id,
+                    'event_id' => $this->event_id
+                ]);
+            }
 
             session()->flash('message', 'Reservation Handled Successfully');
 

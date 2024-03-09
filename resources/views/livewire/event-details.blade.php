@@ -17,7 +17,7 @@
                                 @elseif(App\Models\Reservation::where('user_id', auth()->id())->where('event_id', $event->id)->where('pending', '1')->first())
                                     <div class="w-full bg-green-300 text-white py-2 px-4 rounded-full font-bold">Pending</div>
 
-                                @elseif(App\Models\Reservation::where('user_id', auth()->id())->where('event_id', $event->id)->where('pending', '2')->first())
+                                @elseif(App\Models\Reservation::where('user_id', auth()->id())->where('event_id', $event->id)->where('pending', '0')->first())
                                     <div class="w-full bg-pink-300 text-white py-2 px-4 rounded-full font-bold">Ticket Reserved</div>
 
                                 @else
