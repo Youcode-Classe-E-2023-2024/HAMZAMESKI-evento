@@ -59,6 +59,10 @@ Route::get('/subscribe', function () {
 
 })->name('subscribe');
 
+/* unsubscribe route */
+Route::post('/unsubscribe', [OrganizerSubController::class, 'unsubscribe'])->name('unsubscribe');
+
+
 /* manage event route */
 Route::get('/manageEvents', function () {
     $black_hover = 'Manage events';
@@ -87,3 +91,10 @@ Route::get('/accept-events', function () {
     return view('admin.accept-events', compact('black_hover'));
 
 })->name('accept-events');
+
+/* manage users */
+Route::get('/manage-users', function () {
+    $black_hover = 'Manage users';
+
+    return view('admin.manage-users', compact('black_hover'));
+})->name('manage-users');

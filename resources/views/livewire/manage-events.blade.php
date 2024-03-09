@@ -54,6 +54,9 @@
                                     nmb reservations
                                 </th>
                                 <th scope="col" class="px-4 py-3">
+                                    is published
+                                </th>
+                                <th scope="col" class="px-4 py-3">
                                     edit
                                 </th>
                                 <th scope="col" class="px-4 py-3">
@@ -88,6 +91,7 @@
                                     </td>
                                     <td scope="col" class="px-4 py-3 text-white">{{ $event->available_places }}</td>
                                     <td scope="col" class="px-4 py-3 text-white">{{ $event->nmb_reservations }}</td>
+                                    <td scope="col" class="px-4 py-3 text-white">{{ ($event->is_published == '1') ? '✔' : 'not yet' }}</td>
                                     <td>
                                         <button type="button" data-bs-toggle="modal" data-bs-target="#updateEventModal" wire:click="editEvent({{$event->id}})" class="btn btn-primary">
                                             Edit

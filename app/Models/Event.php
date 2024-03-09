@@ -19,7 +19,8 @@ class Event extends Model
         'available_places',
         'ticket_price',
         'acceptance',
-        'nmb_reservations'
+        'nmb_reservations',
+        'is_published'
     ];
 
     public function scopeSearch($query, $value)

@@ -1,10 +1,20 @@
 @extends('layout.layout')
 @section('content')
+    <style>
+        .SCALE:hover {
+            transform: scale(1.04);
+            transition: all 0.5s;
+        }
+        .SCALE {
+            background-color: rgba(0, 0, 0, 0.53);
+            backdrop-filter: blur(1px);
+        }
+    </style>
     <section class="h-full py-6 sm:py-12 dark:text-gray-100">
         <div class="container p-6 mx-auto space-y-8">
             <div class="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
                 @foreach($events as $event)
-                    <article class="flex flex-col dark:bg-gray-900 border-1 border-solid border-pink-500">
+                    <article class="flex flex-col border-1 border-solid border-gray-500 SCALE">
                         <div rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum">
                             <img  alt="" class="object-cover w-full h-52 dark:bg-gray-500" src="http://127.0.0.1:8000/storage/images/{{ $event->image }}">
                         </div>
