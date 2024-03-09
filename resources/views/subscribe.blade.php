@@ -10,22 +10,48 @@
                         <h1 class="mt-0 mb-12 text-4xl text-white font-bold tracking-tight md:text-5xl xl:text-6xl">
                             Be an Organizer <br /><span class="text-pink-500 dark:text-danger-400">& enjoy adventure?</span>
                         </h1>
-                        <form action="{{ route('subscribe.store') }}" method="POST" class="mb-6 flex-row md:mb-0 md:flex">
-                            @csrf
-                            <div class="relative mb-3 w-full md:mr-3 md:mb-0" data-te-input-wrapper-init>
-                                <input type="email" name="email" id="email" placeholder="Email" value="{{ auth()->user()->email }}" class="block text-white w-full p-4 text-lg rounded-sm bg-black border border-gray-600 border-solid focus:border-pink-500 focus:outline-none focus:ring-pink-500">
-                                <div class="text-red-500">
-                                    @error('email')
-                                    {{ $message }}
-                                    @enderror
+                        @if(auth()->user()->hasRole('denied_for_user'))
+                            <div class="mb-6 flex-row md:mb-0 md:flex">
+                                <div
+                                    class="inline-block border-[1px] border-solid border-orange-500 bg-orange-500 px-7 pt-3 pb-2.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#dc4c64] transition duration-150 ease-in-out hover:bg-danger-600 hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:bg-danger-600 focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:outline-none focus:ring-0 active:bg-danger-700 active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(220,76,100,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)]"
+                                    data-te-ripple-init data-te-ripple-color="light">
+                                    ⏳
+                                </div>
+                                <div class="flex items-center justify-center px-4 border-t-[1px] border-b-[1px] border-r-[1px] border-solid border-orange-500">
+                                    <p class="text-gray-400">
+                                        Your organizer role is handling by admin
+                                    </p>
                                 </div>
                             </div>
-                            <button type="submit"
-                                    class="inline-block rounded bg-pink-500 hover:bg-pink-600 px-7 pt-3 pb-2.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#dc4c64] transition duration-150 ease-in-out hover:bg-danger-600 hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:bg-danger-600 focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:outline-none focus:ring-0 active:bg-danger-700 active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(220,76,100,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)]"
-                                    data-te-ripple-init data-te-ripple-color="light">
-                                Subscribe
-                            </button>
-                        </form>
+                        @elseif(!auth()->user()->hasRole('organizer_lvl4'))
+                            <form action="{{ route('subscribe.store') }}" method="POST" class="mb-6 flex-row md:mb-0 md:flex">
+                                @csrf
+                                <button type="submit"
+                                        class="inline-block border-[1px] border-solid border-pink-500 bg-pink-500 hover:bg-pink-600 px-7 pt-3 pb-2.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#dc4c64] transition duration-150 ease-in-out hover:bg-danger-600 hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:bg-danger-600 focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:outline-none focus:ring-0 active:bg-danger-700 active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(220,76,100,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)]"
+                                        data-te-ripple-init data-te-ripple-color="light">
+                                    Subscribe
+                                </button>
+                                <div class="flex items-center justify-center px-4 border-t-[1px] border-b-[1px] border-r-[1px] border-solid border-pink-500">
+                                    <p class="text-gray-400">
+                                        Your are not an organizer yet!
+                                    </p>
+                                </div>
+                            </form>
+                        @else
+                            <form action="{{ route('unsubscribe') }}" method="POST" class="mb-6 flex-row md:mb-0 md:flex">
+                                @csrf
+                                <button type="submit"
+                                        class="inline-block border-[1px] border-solid border-red-500 bg-red-500 hover:bg-red-600 px-7 pt-3 pb-2.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#dc4c64] transition duration-150 ease-in-out hover:bg-danger-600 hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:bg-danger-600 focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:outline-none focus:ring-0 active:bg-danger-700 active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(220,76,100,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)]"
+                                        data-te-ripple-init data-te-ripple-color="light">
+                                    unsubscribe
+                                </button>
+                                <div class="flex items-center justify-center px-4 border-t-[1px] border-b-[1px] border-r-[1px] border-solid border-red-500">
+                                    <p class="text-gray-400">
+                                        Your are an Organizer Now
+                                    </p>
+                                </div>
+                            </form>
+                        @endif
                     </div>
                 </div>
                 <div class="h-full">

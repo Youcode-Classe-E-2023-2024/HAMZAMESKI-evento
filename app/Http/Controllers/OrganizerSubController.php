@@ -7,16 +7,14 @@ use Illuminate\Http\Request;
 class OrganizerSubController extends Controller
 {
     public function subscribe() {
+        auth()->user()->assignRole('organizer_lvl4');
 
-        $validated = request()->validate([
-            'email' => 'required',
-        ]);
+        return redirect()->back()->with('success', 'Subscribtion Was Handled Successfully');
+    }
 
-        if ($validated['email']->hasRole('organizer_lvl4')) {
+    public function unsubscribe() {
+        auth()->user()->removeRole('organizer_lvl4');
 
-        }
-
-
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Unsubscribtion Was Handled Successfully');
     }
 }
