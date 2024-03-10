@@ -27,4 +27,9 @@ class Event extends Model
     {
         $query->where('name', 'like', "%{$value}%");
     }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class, 'event_id', 'id');
+    }
 }

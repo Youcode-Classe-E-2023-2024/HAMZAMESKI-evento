@@ -128,3 +128,11 @@ Route::get('/my-reserved-events', function () {
 
 /* category-events */
 Route::get('/category-events/{category}', [MainController::class, 'category_events'])->name('category-events');
+
+/* flowchart data */
+Route::get('/data', [MainController::class, 'data']);
+
+Route::get('/flowchart-data', function () {
+    $black_hover = 'Reservations';
+    return view('flowchart', compact('black_hover'));
+})->name('flowchart');
