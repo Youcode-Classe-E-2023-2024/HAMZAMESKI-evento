@@ -32,26 +32,28 @@
                         <span class="icon">
                             <ion-icon name="sparkles-outline"></ion-icon>
                         </span>
-                <span class="title">Manage events</span>
+                <span class="title">My Events</span>
             </a>
         </li>
 
         <li class="{{ $black_hover == 'Reservations' ? 'black_hover': '' }}">
-            <a href="#">
+            <a href="{{ route('flowchart') }}">
                         <span class="icon">
                             <ion-icon name="analytics-outline"></ion-icon>
                         </span>
                 <span class="title">Reservations</span>
             </a>
         </li>
+
         <li class="{{ $black_hover == 'Manage categories' ? 'black_hover': '' }}">
-            <a href="{{ route('manage-categories') }}">
+            <a href="{{ route('flowchart') }}">
                         <span class="icon">
                             <ion-icon name="layers-outline"></ion-icon>
                         </span>
                 <span class="title">Manage categories</span>
             </a>
         </li>
+
         <li class="{{ $black_hover == 'Accept Events' ? 'black_hover': '' }}">
             <a href="{{ route('accept-events') }}">
                         <span class="icon">
@@ -60,6 +62,7 @@
                 <span class="title">Accept Events</span>
             </a>
         </li>
+
         <li class="{{ $black_hover == 'Manage users' ? 'black_hover': '' }}">
             <a href="{{ route('manage-users') }}">
                         <span class="icon">
