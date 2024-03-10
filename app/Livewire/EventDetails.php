@@ -55,9 +55,9 @@ class EventDetails extends Component
                     'pending' => '0'
                 ]);
 
-                $code = 12321;
                 $userId = $this->user_id;
-                Mail::send('emails.ticket', compact('code'), function($message) use ($userId) {
+                $event = Event::find($this->event_id);
+                Mail::send('emails.ticket', compact('event'), function($message) use ($userId) {
                     $user = auth()->user();
                     $message->to($user->email);
                     $message->subject('Event Ticket');
