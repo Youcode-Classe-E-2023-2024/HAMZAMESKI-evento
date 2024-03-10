@@ -41,12 +41,14 @@
                                 <th scope="col" class="px-4 py-3">
                                     event date
                                 </th>
-                                <th scope="col" class="px-4 py-3">
-                                    acceptance
-                                </th>
-                                <th scope="col" class="px-4 py-3">
-                                    Reservers
-                                </th>
+                                @if(auth()->user()->hasPermissionTo('accepte reservations'))
+                                    <th scope="col" class="px-4 py-3">
+                                        acceptance
+                                    </th>
+                                    <th scope="col" class="px-4 py-3">
+                                        Reservers
+                                    </th>
+                                @endif
                                 <th scope="col" class="px-4 py-3">
                                     available places
                                 </th>
@@ -56,12 +58,16 @@
                                 <th scope="col" class="px-4 py-3">
                                     is published
                                 </th>
-                                <th scope="col" class="px-4 py-3">
-                                    edit
-                                </th>
-                                <th scope="col" class="px-4 py-3">
-                                    delete
-                                </th>
+                                @if(auth()->user()->hasPermissionTo('edit event'))
+                                    <th scope="col" class="px-4 py-3">
+                                        edit
+                                    </th>
+                                @endif
+                                @if(auth()->user()->hasPermissionTo('delete event'))
+                                    <th scope="col" class="px-4 py-3">
+                                        delete
+                                    </th>
+                                @endif
                             </tr>
                             </thead>
                             <tbody>
@@ -71,37 +77,43 @@
                                     <td scope="col" class="px-4 py-3 text-white" >{{ $event->name }}</td>
                                     <td scope="col" class="px-4 py-3 text-white">{{ \App\Models\Category::find($event->category_id)->name }}</td>
                                     <td scope="col" class="px-4 py-3 text-white">{{ $event->date }}</td>
-                                    <td>
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#updateAcceptanceModal" wire:click="editAcceptance({{$event->id}})" class="btn  {{ $event->acceptance == 'manual'? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600' }}">
-                                            {{ $event->acceptance }}
-                                        </button>
-                                    </td>
-                                    <td>
-                                        @if($event->acceptance == 'automatic')
-                                            <div class="flex items-center justify-center">
-                                                <span class="font-bold">-</span>
-                                            </div>
-                                        @else
-                                            <div class="flex items-center justify-center">
-                                                <button type="button" data-bs-toggle="modal" data-bs-target="#acceptReserversModal" wire:click="handleReservers({{$event->id}})" class="btn btn-primary">
-                                                    Display
-                                                </button>
-                                            </div>
-                                        @endif
-                                    </td>
+                                    @if(auth()->user()->hasPermissionTo('accepte reservations'))
+                                        <td>
+                                            <button type="button" data-bs-toggle="modal" data-bs-target="#updateAcceptanceModal" wire:click="editAcceptance({{$event->id}})" class="btn  {{ $event->acceptance == 'manual'? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600' }}">
+                                                {{ $event->acceptance }}
+                                            </button>
+                                        </td>
+                                        <td>
+                                            @if($event->acceptance == 'automatic')
+                                                <div class="flex items-center justify-center">
+                                                    <span class="font-bold">-</span>
+                                                </div>
+                                            @else
+                                                <div class="flex items-center justify-center">
+                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#acceptReserversModal" wire:click="handleReservers({{$event->id}})" class="btn btn-primary">
+                                                        Display
+                                                    </button>
+                                                </div>
+                                            @endif
+                                        </td>
+                                    @endif
                                     <td scope="col" class="px-4 py-3 text-white">{{ $event->available_places }}</td>
                                     <td scope="col" class="px-4 py-3 text-white">{{ $event->nmb_reservations }}</td>
                                     <td scope="col" class="px-4 py-3 text-white">{{ ($event->is_published == '1') ? '✔' : 'not yet' }}</td>
-                                    <td>
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#updateEventModal" wire:click="editEvent({{$event->id}})" class="btn btn-primary">
-                                            Edit
-                                        </button>
-                                    </td>
-                                    <td scope="col" class="px-4 py-3 flex items-center justify-end">
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#deleteEventModal" wire:click="deleteEvent({{$event->id}})" class="btn btn-danger">
-                                            Delete
-                                        </button>
-                                    </td>
+                                    @if(auth()->user()->hasPermissionTo('edit event'))
+                                        <td>
+                                            <button type="button" data-bs-toggle="modal" data-bs-target="#updateEventModal" wire:click="editEvent({{$event->id}})" class="btn btn-primary">
+                                                Edit
+                                            </button>
+                                        </td>
+                                    @endif
+                                    @if(auth()->user()->hasPermissionTo('delete event'))
+                                        <td scope="col" class="px-4 py-3 flex items-center justify-end">
+                                            <button type="button" data-bs-toggle="modal" data-bs-target="#deleteEventModal" wire:click="deleteEvent({{$event->id}})" class="btn btn-danger">
+                                                Delete
+                                            </button>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
 
