@@ -10,7 +10,19 @@
             backdrop-filter: blur(1px);
         }
     </style>
-    <main class="h-full w-full flex">
+
+    <div class="fixed z-2 top-[20px] left-[400px]">
+        <div class="relative text-gray-600 focus-within:text-gray-400">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+            <button type="submit" class="p-1 focus:outline-none focus:shadow-outline">
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </button>
+        </span>
+            <input id="searchInput" type="search" name="q" class="py-2 text-sm text-black bg-gray-900 rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900 border-[1px] border-solid border-gray-300" placeholder="Search..." autocomplete="off">
+        </div>
+
+    </div>
+    <main class="h-full w-full flex mt-16">
         <section class="flex-grow h-full sm:py-12 dark:text-gray-100 mr-[100px]">
             <div class="container px-6 mx-auto space-y-8">
                 <div class="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
@@ -53,5 +65,27 @@
             </div>
         </section>
     </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const searchInput = document.getElementById("searchInput");
+            const articles = document.querySelectorAll(".SCALE");
+
+            searchInput.addEventListener("input", function() {
+                const searchText = searchInput.value.toLowerCase();
+
+                articles.forEach(article => {
+                    const articleName = article.querySelector("h3").textContent.toLowerCase();
+
+                    if (articleName.includes(searchText)) {
+                        article.style.display = "block";
+                    } else {
+                        article.style.display = "none";
+                    }
+                });
+            });
+        });
+    </script>
+
 
 @endsection
