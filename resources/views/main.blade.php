@@ -10,17 +10,11 @@
             backdrop-filter: blur(1px);
         }
     </style>
-{{--    <div class="flex items-center justify-between p-2" style="position: fixed; right: 0;">--}}
-{{--        <div></div>--}}
-{{--        <a href="{{ route('my-reserved-events') }}" class="underline text-white">--}}
-{{--            my reserved events--}}
-{{--        </a>--}}
-{{--    </div>--}}
     <main class="h-full w-full flex">
         <section class="flex-grow h-full sm:py-12 dark:text-gray-100 mr-[100px]">
             <div class="container px-6 mx-auto space-y-8">
                 <div class="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
-                    @foreach($events as $event)
+                    @forelse($events as $event)
                         <article class="flex flex-col border-1 border-solid border-gray-500 SCALE">
                             <div rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum">
                                 <img  alt="" class="object-cover w-full h-52 dark:bg-gray-500" src="http://127.0.0.1:8000/storage/images/{{ $event->image }}">
@@ -34,7 +28,13 @@
                                 </div>
                             </div>
                         </article>
-                    @endforeach
+                    @empty
+                        <div class="h-[80vh] w-full flex items-center justify-center" style="grid-column: 1 / -1; grid-row: 1 / -1;">
+                            <h1 class="text-3xl">
+                                NO EVENT FOUND IN THAT'S PAGE
+                            </h1>
+                        </div>
+                    @endforelse
                     {{ $events->links() }}
                 </div>
             </div>
@@ -46,9 +46,9 @@
             </p>
             </p>
             <div class="h-[94%] w-full overflow-auto flex flex-col" style="background-color: black;">
-                <a href="{{ route('main') }}" class="px-4 py-1 text-gray-300 hover:bg-pink-500 hover:text-black {{ $category_hover == 'All'? 'bg-pink-600': '' }}">All</a>
+                <a href="{{ route('main') }}" class="px-4 py-1 text-gray-300 hover:bg-pink-500 {{ $category_hover == 'All'? 'bg-pink-600': '' }}">All</a>
                 @foreach($categories as $category)
-                    <a href="{{ route('category-events', $category->id) }}" class="px-4 py-1 text-gray-300 hover:bg-pink-500 hover:text-black {{ $category_hover == $category->name? 'bg-pink-600': '' }}"> {{ $category->name }}</a>
+                    <a href="{{ route('category-events', $category->id) }}" class="px-4 py-1 text-gray-300 hover:bg-pink-500 {{ $category_hover == $category->name? 'bg-pink-600': '' }}"> {{ $category->name }}</a>
                 @endforeach
             </div>
         </section>
