@@ -10,8 +10,14 @@
             backdrop-filter: blur(1px);
         }
     </style>
-    <section class="h-full py-6 sm:py-12 dark:text-gray-100">
-        <div class="container p-6 mx-auto space-y-8">
+    <div class="flex items-center justify-between p-2" style="position: fixed; right: 0;">
+        <div></div>
+        <a href="{{ route('my-reserved-events') }}" class="underline text-white">
+            my reserved events
+        </a>
+    </div>
+    <section class="h-full  sm:py-12 dark:text-gray-100">
+        <div class="container px-6 mx-auto space-y-8">
             <div class="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
                 @foreach($events as $event)
                     <article class="flex flex-col border-1 border-solid border-gray-500 SCALE">
