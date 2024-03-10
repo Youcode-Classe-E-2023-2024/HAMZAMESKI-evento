@@ -18,6 +18,7 @@
             </a>
         </li>
 
+        @if (!auth()->user()->hasRole('admin'))
         <li class="{{ $black_hover == 'Be an organizer' ? 'black_hover': '' }}">
             <a href="{{ route('subscribe') }}">
                         <span class="icon">
@@ -26,51 +27,56 @@
                 <span class="title">Be an organizer</span>
             </a>
         </li>
+        @endif
 
-        <li class="{{ $black_hover == 'Manage events' ? 'black_hover': '' }}">
-            <a href="{{ route('manage-events') }}" class="">
-                        <span class="icon">
-                            <ion-icon name="sparkles-outline"></ion-icon>
-                        </span>
-                <span class="title">My Events</span>
-            </a>
-        </li>
+        @if (auth()->user()->hasAnyRole(['organizer_lvl1', 'organizer_lvl2', 'organizer_lvl3', 'organizer_lvl4', 'admin']))
+            <li class="{{ $black_hover == 'Manage events' ? 'black_hover': '' }}">
+                <a href="{{ route('manage-events') }}" class="">
+                            <span class="icon">
+                                <ion-icon name="sparkles-outline"></ion-icon>
+                            </span>
+                    <span class="title">My Events</span>
+                </a>
+            </li>
 
-        <li class="{{ $black_hover == 'Reservations' ? 'black_hover': '' }}">
-            <a href="{{ route('flowchart') }}">
-                        <span class="icon">
-                            <ion-icon name="analytics-outline"></ion-icon>
-                        </span>
-                <span class="title">Reservations</span>
-            </a>
-        </li>
+            <li class="{{ $black_hover == 'Reservations' ? 'black_hover': '' }}">
+                <a href="{{ route('flowchart') }}">
+                            <span class="icon">
+                                <ion-icon name="analytics-outline"></ion-icon>
+                            </span>
+                    <span class="title">Reservations</span>
+                </a>
+            </li>
+        @endif
 
-        <li class="{{ $black_hover == 'Manage categories' ? 'black_hover': '' }}">
-            <a href="{{ route('flowchart') }}">
-                        <span class="icon">
-                            <ion-icon name="layers-outline"></ion-icon>
-                        </span>
-                <span class="title">Manage categories</span>
-            </a>
-        </li>
+        @if (auth()->user()->hasRole('admin'))
+            <li class="{{ $black_hover == 'Manage categories' ? 'black_hover': '' }}">
+                <a href="{{ route('manage-categories') }}">
+                            <span class="icon">
+                                <ion-icon name="layers-outline"></ion-icon>
+                            </span>
+                    <span class="title">Manage categories</span>
+                </a>
+            </li>
 
-        <li class="{{ $black_hover == 'Accept Events' ? 'black_hover': '' }}">
-            <a href="{{ route('accept-events') }}">
-                        <span class="icon">
-                            <ion-icon name="hourglass-outline"></ion-icon>
-                        </span>
-                <span class="title">Accept Events</span>
-            </a>
-        </li>
+            <li class="{{ $black_hover == 'Accept Events' ? 'black_hover': '' }}">
+                <a href="{{ route('accept-events') }}">
+                            <span class="icon">
+                                <ion-icon name="hourglass-outline"></ion-icon>
+                            </span>
+                    <span class="title">Accept Events</span>
+                </a>
+            </li>
 
-        <li class="{{ $black_hover == 'Manage users' ? 'black_hover': '' }}">
-            <a href="{{ route('manage-users') }}">
-                        <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
-                        </span>
-                <span class="title">Manage users</span>
-            </a>
-        </li>
+            <li class="{{ $black_hover == 'Manage users' ? 'black_hover': '' }}">
+                <a href="{{ route('manage-users') }}">
+                            <span class="icon">
+                                <ion-icon name="people-outline"></ion-icon>
+                            </span>
+                    <span class="title">Manage users</span>
+                </a>
+            </li>
+        @endif
 
         <li class="{{ $black_hover == 'Profile' ? 'black_hover': '' }}">
             <a href="{{ route('profile.edit') }}">
