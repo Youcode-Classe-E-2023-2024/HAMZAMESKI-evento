@@ -75,7 +75,7 @@ class EventDetails extends Component
                 ]);
             }
 
-            session()->flash('message', 'Reservation Handled Successfully');
+            session()->flash('success', 'Reservation Handled Successfully');
 
             $this->dispatch('close-modal');
         }

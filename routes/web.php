@@ -132,4 +132,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/back-home', function () {
         return redirect()->route('main');
     })->name('back');
+
+    /* destroy-success-message */
+    Route::get('/destroy-success-message', function () {
+        session()->forget('success');
+        return redirect()->back();
+    })->name('destroy-success-message');
 });

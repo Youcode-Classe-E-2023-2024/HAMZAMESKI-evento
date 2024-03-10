@@ -13,6 +13,21 @@
 
     </div>
 
+    @if(session()->has('success'))
+        <div class="flex justify-center items-center">
+            <div class="bg-green-500 text-white px-4 py-2 rounded-lg flex gap-2 items-center mb-4">
+                <ion-icon name="checkmark-done-outline"></ion-icon>
+                <p>
+                    {{ session('success') }}
+                </p>
+                <a href="{{ route('destroy-success-message') }}" class="ml-8">
+                    <ion-icon name="close-outline" class="text-xl"></ion-icon>
+                </a>
+            </div>
+        </div>
+    @endif
+
+
     <div class="h-full flex items-center justify-center">
         <div class="border-[1px] border-solid border-gray-500 py-8 rounded-md SCALE">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
