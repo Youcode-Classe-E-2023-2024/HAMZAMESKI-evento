@@ -17,7 +17,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn text-white btn hover:bg-gray-600 bg-gray-500 border-0" wire:click="closeModal"
                             data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="text-white btn hover:bg-red-600 bg-red-500 border-0">Yes! reserve</button>
+                    <button type="submit" class="text-white btn hover:bg-green-600 bg-green-500 border-0">Yes! reserve</button>
                 </div>
             </form>
         </div>

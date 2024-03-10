@@ -38,7 +38,10 @@
                         </div>
                         <div class="flex -mx-2 mb-4">
                             <div class="w-1/2 px-2 flex w-full">
-                                @if($event->available_places <= 0)
+                                @if($event->date < Carbon\Carbon::now()->toDateString())
+                                    <div class="bg-red-400 text-white py-2 px-4 rounded-sm font-bold flex-shrink">Event Outdated</div>
+
+                                @elseif($event->available_places <= 0)
                                     <div class="bg-pink-400 text-white py-2 px-4 rounded-sm font-bold flex-shrink">Sold Out</div>
 
                                 @elseif(App\Models\Reservation::where('user_id', auth()->id())->where('event_id', $event->id)->where('pending', '1')->first())

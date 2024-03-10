@@ -199,7 +199,9 @@
             <div class="modal-header">
                 <h5 class="modal-title font-bold" id="acceptReserversModalLabel">Reservation Orders:</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                        wire:click="closeModal"></button>
+                        wire:click="closeModal">
+                    <div class="h-[20px] w-[20px]" style="background-image: url('http://127.0.0.1:8000/storage/images/close-outline.svg'); background-size: cover; background-position: center; "></div>
+                </button>
             </div>
             <form wire:submit.prevent="acceptReservers">
                 <div class="modal-body">
@@ -218,9 +220,9 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" wire:click="closeModal"
+                    <button type="button" class="btn btn-secondary text-gray-500" wire:click="closeModal"
                             data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Accept Reservations order</button>
+                    <button type="submit" class="btn btn-primary text-blue-500">Accept Reservations order</button>
                 </div>
             </form>
         </div>
