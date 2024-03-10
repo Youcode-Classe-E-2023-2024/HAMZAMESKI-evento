@@ -125,3 +125,6 @@ Route::get('/my-reserved-events', function () {
     $black_hover = 'Home';
     return view('event.my-reserved-events', compact('black_hover'));
 })->name('my-reserved-events');
+
+/* category-events */
+Route::get('/category-events/{category}', [MainController::class, 'category_events'])->name('category-events');
