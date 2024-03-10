@@ -83,9 +83,9 @@
                         <select wire:model="role" class="form-control">
                             <option value="user">user</option>
                             <option value="organizer-lvl1">organizer-lvl1 (add event)</option>
-                            <option value="organizer-lvl2">organizer-lvl2 (add favorits + edit event)</option>
-                            <option value="organizer-lvl3">organizer-lvl3 (add favorits + edit event + delete event)</option>
-                            <option value="organizer-lvl4">organizer-lvl4 (CRUD event + accepte reservations + see statistics)</option>
+                            <option value="organizer-lvl2">organizer-lvl2 (add event + edit event)</option>
+                            <option value="organizer-lvl3">organizer-lvl3 (add event + edit event + delete event)</option>
+                            <option value="organizer-lvl4">organizer-lvl4 (CRUD event + Handle reservation system)</option>
                         </select>
                         @error('role') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>

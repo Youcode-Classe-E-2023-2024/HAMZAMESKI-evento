@@ -37,8 +37,6 @@ Route::group(['middleware' => ['guest']], function () {
 
     Route::post('/login', [AuthController::class, 'authenticate'])->name('login.authenticate')->middleware('guest');
 
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
-
     Route::delete('/user/delete', [AuthController::class, 'destroy'])->name('user.delete');
 
     /* forget-password route */
@@ -98,6 +96,8 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
 /* Profile Route */
 Route::group(['middleware' => ['auth']], function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 
     Route::put('/profile/userInfo', [ProfileController::class, 'userInfoUpdate'])->name('profile.userInfo.update');
@@ -132,4 +132,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/back-home', function () {
         return redirect()->route('main');
     })->name('back');
+
+    /* destroy-success-message */
+    Route::get('/destroy-success-message', function () {
+        session()->forget('success');
+        return redirect()->back();
+    })->name('destroy-success-message');
 });
