@@ -49,5 +49,4 @@ class User extends Authenticatable
     {
         $query->where('name', 'like', "%{$value}%");
     }
-
 }

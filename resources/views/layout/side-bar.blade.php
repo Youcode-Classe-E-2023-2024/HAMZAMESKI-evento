@@ -30,7 +30,7 @@
         <li class="{{ $black_hover == 'Manage events' ? 'black_hover': '' }}">
             <a href="{{ route('manage-events') }}" class="">
                         <span class="icon">
-                            <ion-icon name="construct-outline"></ion-icon>
+                            <ion-icon name="sparkles-outline"></ion-icon>
                         </span>
                 <span class="title">Manage events</span>
             </a>
@@ -47,7 +47,7 @@
         <li class="{{ $black_hover == 'Manage categories' ? 'black_hover': '' }}">
             <a href="{{ route('manage-categories') }}">
                         <span class="icon">
-                            <ion-icon name="grid-outline"></ion-icon>
+                            <ion-icon name="layers-outline"></ion-icon>
                         </span>
                 <span class="title">Manage categories</span>
             </a>

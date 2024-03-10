@@ -16,12 +16,15 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users', 'id')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('name');
             $table->text('description');
+            $table->string('image')->default('_');
             $table->date('date');
             $table->string('place');
-            $table->string('category');
+            $table->integer('ticket_price');
+            $table->foreignId('category_id')->constrained('categories', 'id')->cascadeOnUpdate()->cascadeOnDelete();
             $table->integer('available_places');
             $table->integer('nmb_reservations')->default(0);
             $table->enum('acceptance', ['automatic', 'manual'])->default('automatic');
+            $table->enum('is_published', ['0', '1'])->default('0');
             $table->timestamps();
         });
     }

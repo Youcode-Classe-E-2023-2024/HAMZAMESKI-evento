@@ -6,6 +6,12 @@
         }
     </style>
     @include('reserve-ticket-popup.confirm-reservation-form')
+    <div class="flex justify-between items-center mb-2">
+        <a href="{{ route('back') }}">
+            <ion-icon name="arrow-back-outline" class="text-white text-xl"></ion-icon>
+        </a>
+
+    </div>
 
     <div class="h-full flex items-center justify-center">
         <div class="border-[1px] border-solid border-gray-500 py-8 rounded-md SCALE">
