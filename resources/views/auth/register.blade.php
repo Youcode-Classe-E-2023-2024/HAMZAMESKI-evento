@@ -70,6 +70,9 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="text-right text-gray-400 hover:underline hover:text-gray-100 flex justify-between">
+                        <a href="{{ route('login') }}">Login</a>
+                    </div>
                     <div class="px-4 pb-2 pt-4">
                         <button type="submit" class="uppercase block w-full p-4 text-lg rounded-full bg-pink-500 hover:bg-pink-600 focus:outline-none">sign up</button>
                     </div>

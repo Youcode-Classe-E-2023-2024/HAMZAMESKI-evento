@@ -54,7 +54,8 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="text-right text-gray-400 hover:underline hover:text-gray-100">
+                    <div class="text-right text-gray-400 hover:underline hover:text-gray-100 flex justify-between">
+                        <a href="{{ route('register') }}">Register</a>
                         <a href="{{ route('forget.password') }}">Forgot your password?</a>
                     </div>
                     <div class="px-4 pb-2 pt-4">
